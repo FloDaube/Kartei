@@ -24,6 +24,14 @@ namespace Kartei.Klassen
 
         }
 
+        public User()
+        {
+            UserID = "";
+            Kennwort = "";
+            Vorname = "";
+            Nachname = "";
+        }
+
         public string Anmelden()
         {
             string res = "";
