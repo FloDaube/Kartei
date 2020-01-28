@@ -16,7 +16,7 @@ namespace Kartei
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainKartei());
+            Application.Run(new LogIn());
         }
     }
 }
