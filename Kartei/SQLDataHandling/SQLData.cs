@@ -16,6 +16,12 @@ namespace Kartei.SQLDataHandler
 
         }
 
+        public string getConnectioString()
+        {
+
+        }
+
+        #region Login Daten
         /// <summary>
         /// Gibt den Select String zurück für Anmeldung des User.
         /// </summary>
@@ -41,9 +47,14 @@ namespace Kartei.SQLDataHandler
                 res.UserID = String.Format("{0}", record[1]);
                 res.Vorname = String.Format("{0}", record[2]);
                 res.Nachname = String.Format("{0}", record[3]);
-
             }
             return res;
+        }
+        #endregion
+
+        public string getPatientenList_Select()
+        {
+            return $"SELECT * From [Patienten] Order by P_Nachname"; 
         }
     }
 }

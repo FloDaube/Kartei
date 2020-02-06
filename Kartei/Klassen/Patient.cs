@@ -8,19 +8,27 @@ namespace Kartei.Klassen
 {
     public class Patient : Kartei
     {
-        DateTime _geboren;
+        int _iD;
+        DateTime _geborenAm;
         string _vorname;
         string _nachname;
+        string _geschlecht;
 
-        public DateTime Geboren { get => _geboren; set => _geboren = value; }
+        
         public string Vorname { get => _vorname; set => _vorname = value; }
         public string Nachname { get => _nachname; set => _nachname = value; }
+        public int Alter { get => DateTime.Today.Year - _geborenAm.Year; }
+        public int ID { get => _iD; set => _iD = value; }
+        public string Geschlecht { get => _geschlecht; set => _geschlecht = value; }
+        public DateTime GeborenAm { get => _geborenAm; set => _geborenAm = value; }
 
-        public int Alter { get => DateTime.Today.Year - _geboren.Year; }
-
-        public Patient(int Alter, string _vorname, string _nachname, string _beschwerde, string _diagnose, DateTime _datum, int Krankheitsdauer, string _arzt, int _id)
+        public Patient(string Vorname,string Nachname, string Geschlecht, DateTime GeborenAm)
         {
-
+            this.ID = -1;
+            this.Vorname = Vorname;
+            this.Nachname = Nachname;
+            this.Geschlecht = Geschlecht;
+            this.GeborenAm = GeborenAm;
         }
     }
 }

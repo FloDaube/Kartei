@@ -27,12 +27,6 @@ namespace Kartei.Service
         {
             User res = new User();
 
-            //using (SqlConnection connection = new SqlConnection($"Server=localhost;Database=SAEL_KarteiProjekt;User Id=SAEL_DB_User;Password=KdycUvcYfzYXdJ1YVBPi;"))
-            //{
-            //    connection.Open();
-            //    // Do work here; connection closed on following line.  
-            //}
-            //SQL ANMELDUNG
             using (SqlConnection connection = new SqlConnection(Connetionstring))
             {
                 connection.Open();
