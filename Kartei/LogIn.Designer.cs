@@ -65,6 +65,7 @@
             // 
             this.textBox_Kennwort.Location = new System.Drawing.Point(73, 86);
             this.textBox_Kennwort.Name = "textBox_Kennwort";
+            this.textBox_Kennwort.PasswordChar = '*';
             this.textBox_Kennwort.Size = new System.Drawing.Size(100, 20);
             this.textBox_Kennwort.TabIndex = 3;
             // 
@@ -101,6 +102,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LogIn";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Anmeldung";
             this.ResumeLayout(false);
             this.PerformLayout();

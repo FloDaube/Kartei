@@ -36,7 +36,7 @@ namespace Kartei.SQLDataHandler
             }
             else
             {
-                return $"SELECT U_ID, U_User_ID, U_Vorname, U_Nachname FROM[User] Where U_User_ID = '{UserID}' AND U_Kennwort = '{Kennwort}'";
+                return $"SELECT U_ID, U_User_ID, U_Vorname, U_Nachname, U_Role FROM[User] Where U_User_ID = '{UserID}' AND U_Kennwort = '{Kennwort}'";
             }
         }
         /// <summary>
@@ -54,6 +54,7 @@ namespace Kartei.SQLDataHandler
                 res.UserID = String.Format("{0}", record[1]);
                 res.Vorname = String.Format("{0}", record[2]);
                 res.Nachname = String.Format("{0}", record[3]);
+                res.Role = String.Format("{0}", record[4]);
             }
             return res;
         }
@@ -75,10 +76,41 @@ namespace Kartei.SQLDataHandler
             return res;
         }
         #endregion
-
-        public string getPatientenList_Select()
+        #region Patienten
+        public string getPatientenList_Select(string Suche)
         {
-            return $"SELECT * From [Patienten] Order by P_Nachname"; 
+            string res = "";
+            if (Suche == "")
+            {
+                res =  $"SELECT * From [Patienten] Order by P_Nachname";
+            }
+            else
+            {
+                res = $"SELECT * From [Patienten] Order by P_Nachname WHERE (P_Nachname >= '{Suche}')";
+            }
+
+            return res;
         }
+
+        public List<Patient> ReadPatientList(SqlDataReader reader)
+        {
+            List<Patient> res = new List<Patient>();
+            while (reader.Read())
+            {
+                //P_ID, P_Vorname, P_Nachname, P_Geschlecht, P_GeborenAm, P_LetzterKartei
+
+                Patient _Patient = new Patient();
+                IDataRecord record = reader;
+                _Patient.ID = Convert.ToInt32(String.Format("{0}", record[0]));
+                _Patient.Vorname = String.Format("{0}", record[1]);
+                _Patient.Nachname = String.Format("{0}", record[2]);
+                _Patient.Geschlecht = String.Format("{0}", record[3]);
+                //_Patient.GeborenAm = new DateTime(Convert.ToInt32(String.Format("{0}", record[4]))); // Format Fehler
+                res.Add(_Patient);
+            }
+            return res;
+        }
+
+        #endregion
     }
 }

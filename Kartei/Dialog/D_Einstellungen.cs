@@ -33,7 +33,7 @@ namespace Kartei.Dialog
             label_UserID.Text = _User.UserID;
             label_Vorname.Text = _User.Vorname;
             label_Nachname.Text = _User.Nachname;
-            
+            label_Role.Text = _User.Role;
         }
     }
 }

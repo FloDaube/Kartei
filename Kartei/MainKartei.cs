@@ -1,5 +1,6 @@
 ﻿using Kartei.Dialog;
 using Kartei.Klassen;
+using Kartei.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +15,13 @@ namespace Kartei
 {
     public partial class MainKartei : Form
     {
+        private PatientenService _patientenService = new PatientenService();
         private Form _loginDialog;
         private User _user;
         private bool _abmelden;
+
+        private List<Patient> patienten = new List<Patient>();
+
         public MainKartei(User User, Form form)
         {
             InitializeComponent();
@@ -27,7 +32,7 @@ namespace Kartei
 
         private void SuchePartient(object sender, EventArgs e)
         {
-
+            _patientenService.GetPatienten();
         }
 
         private void Neuer_Patient(object sender, EventArgs e)
@@ -49,13 +54,15 @@ namespace Kartei
         private void Timer_AnmeldungScreen_Tick(object sender, EventArgs e)
         {
             timer_AnmeldungScreen.Enabled = false;
-            //_loginDialog.Close();
             _loginDialog.Visible = false;
+
+            patienten = _patientenService.GetPatienten();
+            UpdatePetientenViewe();
         }
 
         private void EinstellungenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            D_Einstellungen einstellungen = new D_Einstellungen();
+            D_Einstellungen einstellungen = new D_Einstellungen(_user);
             einstellungen.ShowDialog();
         }
 
@@ -66,6 +73,17 @@ namespace Kartei
                 _loginDialog.Close();
             }
             base.OnClosing(e);
+        }
+
+        private void UpdatePetientenViewe()
+        {
+            foreach (Patient p in patienten)
+            {
+                ListViewItem lv = new ListViewItem();
+                lv.Text = p.Nachname;
+                lv.SubItems.Add(p.Vorname);
+                listView_Patienten.Items.Add(lv);
+            }
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Kartei.Klassen
             _iD = u.ID;
             Vorname = u.Vorname;
             Nachname = u.Nachname;
-
+            Role = u.Role;
             return res;
         }
 

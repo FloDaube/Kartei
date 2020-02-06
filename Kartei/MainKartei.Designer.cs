@@ -81,7 +81,7 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 21);
+            this.groupBox1.Location = new System.Drawing.Point(12, 27);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(256, 86);
             this.groupBox1.TabIndex = 0;
@@ -131,8 +131,9 @@
             this.listView_Patienten.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader_Nachname,
             this.columnHeader_Name});
+            this.listView_Patienten.FullRowSelect = true;
             this.listView_Patienten.HideSelection = false;
-            this.listView_Patienten.Location = new System.Drawing.Point(12, 113);
+            this.listView_Patienten.Location = new System.Drawing.Point(12, 119);
             this.listView_Patienten.Name = "listView_Patienten";
             this.listView_Patienten.Size = new System.Drawing.Size(256, 725);
             this.listView_Patienten.TabIndex = 1;
@@ -436,26 +437,27 @@
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.einstellungenToolStripMenuItem.Text = "Einstellungen";
             this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.EinstellungenToolStripMenuItem_Click);
             // 
             // abmeldenToolStripMenuItem
             // 
             this.abmeldenToolStripMenuItem.Name = "abmeldenToolStripMenuItem";
-            this.abmeldenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abmeldenToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.abmeldenToolStripMenuItem.Text = "Abmelden";
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
             // 
             // MainKartei
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(1237, 841);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);

@@ -13,7 +13,7 @@ namespace Kartei.Klassen
         string _vorname;
         string _nachname;
         string _geschlecht;
-
+        private List<Kartei> _karteien = new List<Kartei>();
         
         public string Vorname { get => _vorname; set => _vorname = value; }
         public string Nachname { get => _nachname; set => _nachname = value; }
@@ -21,6 +21,7 @@ namespace Kartei.Klassen
         public int ID { get => _iD; set => _iD = value; }
         public string Geschlecht { get => _geschlecht; set => _geschlecht = value; }
         public DateTime GeborenAm { get => _geborenAm; set => _geborenAm = value; }
+        public List<Kartei> Karteien { get => _karteien; set => _karteien = value; }
 
         public Patient(string Vorname,string Nachname, string Geschlecht, DateTime GeborenAm)
         {
@@ -30,5 +31,14 @@ namespace Kartei.Klassen
             this.Geschlecht = Geschlecht;
             this.GeborenAm = GeborenAm;
         }
+        public Patient()
+        {
+            this.ID = -1;
+            this.Vorname = "";
+            this.Nachname = "";
+            this.Geschlecht = "";
+            this.GeborenAm = DateTime.Today;
+        }
+
     }
 }
