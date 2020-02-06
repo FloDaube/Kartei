@@ -9,12 +9,12 @@ namespace Kartei.Klassen
 {
     public class User
     {
-        int _iD;
-        string _userID;
-        string _vorname;
-        string _nachname;
-        string _kennwort;
-
+        private int _iD;
+        private string _userID;
+        private string _vorname;
+        private string _nachname;
+        private string _kennwort;
+        private string _role;
         public User(string User, string Kennwort)
         {
             _iD = -1;
@@ -65,5 +65,6 @@ namespace Kartei.Klassen
         /// Kennwort des Nutzers.
         /// </summary>
         public string Kennwort { get => _kennwort; set => _kennwort = value; }
+        public string Role { get => _role; set => _role = value; }
     }
 }

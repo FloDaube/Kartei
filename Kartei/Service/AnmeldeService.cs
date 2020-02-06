@@ -13,12 +13,13 @@ namespace Kartei.Service
 {
     public class AnmeldeService
     {
-        string Connetionstring = "Data Source='localhost';Initial Catalog = 'SAEL_KarteiProjekt'; User ID = 'SAEL_DB_User'; Password='KdycUvcYfzYXdJ1YVBPi'";
+        private SQLData _SQLData = new SQLData();
+        private string Connetionstring = "";
         User _user;
-        SQLData _SQLData = new SQLData();
         public AnmeldeService(User user)
         {
             this.User = user;
+            Connetionstring = _SQLData.getConnectioString();
         }
 
         public User User { get => _user; set => _user = value; }
@@ -56,10 +57,6 @@ namespace Kartei.Service
             }
 
             return res;
-        }
-        private static void ReadSingleRow(IDataRecord record)
-        {
-            MessageBox.Show(String.Format("{0}, {1}", record[0], record[1]));
         }
     }
 }

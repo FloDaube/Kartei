@@ -8,6 +8,9 @@ namespace Kartei.Klassen
 {
     static class Einstellungen
     {
-        static string Host = "";
+        public static string Host = "localhost";
+        public static string DataBase = "SAEL_KarteiProjekt";
+        public static string SQLUser = "SAEL_DB_User";
+        public static string Passwort = "KdycUvcYfzYXdJ1YVBPi";
     }
 }

@@ -64,9 +64,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.timer_AnmeldungScreen = new System.Windows.Forms.Timer(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abmeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -75,7 +81,7 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 21);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(256, 86);
             this.groupBox1.TabIndex = 0;
@@ -126,7 +132,7 @@
             this.columnHeader_Nachname,
             this.columnHeader_Name});
             this.listView_Patienten.HideSelection = false;
-            this.listView_Patienten.Location = new System.Drawing.Point(12, 104);
+            this.listView_Patienten.Location = new System.Drawing.Point(12, 113);
             this.listView_Patienten.Name = "listView_Patienten";
             this.listView_Patienten.Size = new System.Drawing.Size(256, 725);
             this.listView_Patienten.TabIndex = 1;
@@ -148,7 +154,7 @@
             this.listView_Kartei.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listView_Kartei.HideSelection = false;
-            this.listView_Kartei.Location = new System.Drawing.Point(274, 140);
+            this.listView_Kartei.Location = new System.Drawing.Point(274, 153);
             this.listView_Kartei.Name = "listView_Kartei";
             this.listView_Kartei.Size = new System.Drawing.Size(359, 699);
             this.listView_Kartei.TabIndex = 2;
@@ -184,7 +190,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.richTextBox1);
             this.groupBox2.Controls.Add(this.dateTimePicker1);
-            this.groupBox2.Location = new System.Drawing.Point(639, 12);
+            this.groupBox2.Location = new System.Drawing.Point(639, 20);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(586, 827);
             this.groupBox2.TabIndex = 4;
@@ -338,7 +344,7 @@
             this.groupBox3.Controls.Add(this.textBox3);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(274, 7);
+            this.groupBox3.Location = new System.Drawing.Point(274, 20);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(359, 127);
             this.groupBox3.TabIndex = 5;
@@ -407,6 +413,45 @@
             this.timer_AnmeldungScreen.Interval = 2000;
             this.timer_AnmeldungScreen.Tick += new System.EventHandler(this.Timer_AnmeldungScreen_Tick);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dateiToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1237, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // dateiToolStripMenuItem
+            // 
+            this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.einstellungenToolStripMenuItem,
+            this.abmeldenToolStripMenuItem,
+            this.beendenToolStripMenuItem});
+            this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.dateiToolStripMenuItem.Text = "Datei";
+            // 
+            // einstellungenToolStripMenuItem
+            // 
+            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.einstellungenToolStripMenuItem.Text = "Einstellungen";
+            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.EinstellungenToolStripMenuItem_Click);
+            // 
+            // abmeldenToolStripMenuItem
+            // 
+            this.abmeldenToolStripMenuItem.Name = "abmeldenToolStripMenuItem";
+            this.abmeldenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abmeldenToolStripMenuItem.Text = "Abmelden";
+            // 
+            // beendenToolStripMenuItem
+            // 
+            this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beendenToolStripMenuItem.Text = "Beenden";
+            // 
             // MainKartei
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -417,6 +462,8 @@
             this.Controls.Add(this.listView_Kartei);
             this.Controls.Add(this.listView_Patienten);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainKartei";
             this.Text = "Kartei";
             this.groupBox1.ResumeLayout(false);
@@ -425,7 +472,10 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -466,6 +516,11 @@
         private System.Windows.Forms.TextBox textBox_WiderholungsKarteiID;
         private System.Windows.Forms.CheckBox checkBox_WiederholVorgang;
         private System.Windows.Forms.Timer timer_AnmeldungScreen;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abmeldenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
     }
 }
 

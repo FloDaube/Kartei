@@ -1,4 +1,5 @@
-﻿using Kartei.Klassen;
+﻿using Kartei.Dialog;
+using Kartei.Klassen;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +14,14 @@ namespace Kartei
 {
     public partial class MainKartei : Form
     {
-        private Form _form;
+        private Form _loginDialog;
         private User _user;
+        private bool _abmelden;
         public MainKartei(User User, Form form)
         {
             InitializeComponent();
             _user = User;
-            _form = form;
+            _loginDialog = form;
             timer_AnmeldungScreen.Enabled = true;
         }
 
@@ -47,8 +49,23 @@ namespace Kartei
         private void Timer_AnmeldungScreen_Tick(object sender, EventArgs e)
         {
             timer_AnmeldungScreen.Enabled = false;
-            //_form.Close();
-            _form.Visible = false;
+            //_loginDialog.Close();
+            _loginDialog.Visible = false;
+        }
+
+        private void EinstellungenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            D_Einstellungen einstellungen = new D_Einstellungen();
+            einstellungen.ShowDialog();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (!_abmelden)
+            {
+                _loginDialog.Close();
+            }
+            base.OnClosing(e);
         }
     }
 }

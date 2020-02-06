@@ -18,7 +18,7 @@ namespace Kartei.SQLDataHandler
 
         public string getConnectioString()
         {
-
+            return $"Data Source = '{Einstellungen.Host}'; Initial Catalog = '{Einstellungen.DataBase}'; User ID = '{Einstellungen.SQLUser}'; Password = '{Einstellungen.Passwort}'";
         }
 
         #region Login Daten
@@ -28,9 +28,16 @@ namespace Kartei.SQLDataHandler
         /// <param name="UserID"></param>
         /// <param name="Kennwort"></param>
         /// <returns></returns>
-        public string getAnmeldung_Select(string UserID,string Kennwort)
+        public string getAnmeldung_Select(string UserID, string Kennwort, bool AllAsList = false)
         {
-            return $"SELECT U_ID, U_User_ID, U_Vorname, U_Nachname FROM[User] Where U_User_ID = '{UserID}' AND U_Kennwort = '{Kennwort}'";
+            if (AllAsList)
+            {
+                return $"SELECT U_ID, U_User_ID, U_Vorname, U_Nachname FROM[User]";
+            }
+            else
+            {
+                return $"SELECT U_ID, U_User_ID, U_Vorname, U_Nachname FROM[User] Where U_User_ID = '{UserID}' AND U_Kennwort = '{Kennwort}'";
+            }
         }
         /// <summary>
         /// 
@@ -47,6 +54,23 @@ namespace Kartei.SQLDataHandler
                 res.UserID = String.Format("{0}", record[1]);
                 res.Vorname = String.Format("{0}", record[2]);
                 res.Nachname = String.Format("{0}", record[3]);
+            }
+            return res;
+        }
+
+        public List<User> ReadUserList(SqlDataReader reader)
+        {
+            List<User> res = new List<User>();
+            while (reader.Read())
+            {
+                User _user = new User();
+                IDataRecord record = reader;
+                _user.ID = Convert.ToInt32(String.Format("{0}", record[0]));
+                _user.UserID = String.Format("{0}", record[1]);
+                _user.Vorname = String.Format("{0}", record[2]);
+                _user.Nachname = String.Format("{0}", record[3]);
+                _user.Role = String.Format("{0}", record[4]);
+                res.Add(_user);
             }
             return res;
         }

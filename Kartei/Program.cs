@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Kartei.Dialog;
 namespace Kartei
 {
     static class Program
@@ -16,6 +16,7 @@ namespace Kartei
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new D_Einstellungen());
             Application.Run(new LogIn());
         }
     }
