@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Kartei.Klassen;
+using Kartei.SQLDataHandler;
 
 namespace Kartei.Service
 {
@@ -14,7 +15,7 @@ namespace Kartei.Service
     {
         string Connetionstring = "Data Source='localhost';Initial Catalog = 'SAEL_KarteiProjekt'; User ID = 'SAEL_DB_User'; Password='KdycUvcYfzYXdJ1YVBPi'";
         User _user;
-
+        SQLData _SQLData = new SQLData();
         public AnmeldeService(User user)
         {
             this.User = user;
@@ -37,20 +38,14 @@ namespace Kartei.Service
                 connection.Open();
                 if(connection.State == ConnectionState.Open)
                 {
-                    SqlCommand command = new SqlCommand($"SELECT U_ID, U_User_ID, U_Vorname, U_Nachname FROM [User] Where U_User_ID = @U_User_ID", connection);
-                    command.Parameters.Add("@U_User_ID", SqlDbType.NVarChar);
-                    command.Parameters.Add("@U_Kennwort", SqlDbType.NVarChar);
-                    command.Parameters["@U_User_ID"].Value = _user.UserID;
-                    command.Parameters["@U_Kennwort"].Value = _user.Kennwort;
-
+                    SqlCommand command = new SqlCommand(_SQLData.getAnmeldung_Select(_user.UserID,_user.Kennwort), connection);
+                    
                     try
                     {
                         SqlDataReader reader = command.ExecuteReader();
                         if (reader.HasRows)
                         {
-                            while (reader.Read())
-                            {
-                            }
+                            res = _SQLData.ReadUser(reader);
                         }
                         else
                         {
@@ -67,6 +62,10 @@ namespace Kartei.Service
             }
 
             return res;
+        }
+        private static void ReadSingleRow(IDataRecord record)
+        {
+            MessageBox.Show(String.Format("{0}, {1}", record[0], record[1]));
         }
     }
 }
