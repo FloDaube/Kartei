@@ -34,10 +34,22 @@ namespace Kartei
             }
         }
 
-
-        private void UsernameEingabe_Enter(object sender, DragEventArgs e)
+        private void TextBox_Username_KeyDown(object sender, KeyEventArgs e)
         {
-            textBox_Kennwort.Focus();
+            if(e.KeyCode == Keys.Enter)
+            {
+                textBox_Kennwort.Focus();
+            }
+        }
+
+        private void TextBox_Kennwort_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                object s = new object();
+                EventArgs ea = new EventArgs();
+                Button_Anmelden_Click(s,ea);
+            }
         }
     }
 }

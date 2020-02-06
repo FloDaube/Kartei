@@ -84,6 +84,7 @@ namespace Kartei
             foreach (Patient p in patienten)
             {
                 ListViewItem lv = new ListViewItem();
+                lv.Tag = p.ID;
                 lv.Text = p.Nachname;
                 lv.SubItems.Add(p.Vorname);
                 lv.SubItems.Add(p.Alter.ToString());
@@ -107,6 +108,30 @@ namespace Kartei
         {
             _abmelden = true;
             Close();
+        }
+
+        private void TextBox_PatientenSuche_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                object s = new object();
+                EventArgs ea = new EventArgs();
+                SuchePartient(s,ea);
+            }
+        }
+
+        private void ListView_Patienten_Click(object sender, EventArgs e)
+        {
+            int lv = Convert.ToInt32(listView_Patienten.SelectedItems[0].Tag);
+            foreach(Patient p in patienten)
+            {
+                if(p.ID == lv)
+                {
+                    textBox_Vorname.Text = p.Vorname;
+                    textBox_Nachname.Text = p.Nachname;
+                    textBox_Geschlecht.Text = p.Geschlecht;
+                }
+            }
         }
     }
 }
