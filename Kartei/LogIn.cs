@@ -22,7 +22,8 @@ namespace Kartei
         {
             User _user = new User(textBox_Username.Text,textBox_Kennwort.Text);
             _user.Anmelden();
-            if(_user.ID > 0)
+            textBox_Kennwort.Text = "";
+            if (_user.ID > 0)
             {
                 MainKartei mainKartei = new MainKartei(_user,this);
                 mainKartei.Show();

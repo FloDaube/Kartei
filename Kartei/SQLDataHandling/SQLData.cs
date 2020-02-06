@@ -82,11 +82,11 @@ namespace Kartei.SQLDataHandler
             string res = "";
             if (Suche == "")
             {
-                res =  $"SELECT * From [Patienten] Order by P_Nachname";
+                res =  $"SELECT * From [Patienten] Order by P_Nachname, P_Vorname";
             }
             else
             {
-                res = $"SELECT * From [Patienten] Order by P_Nachname WHERE (P_Nachname >= '{Suche}')";
+                res = $"SELECT * From [Patienten] WHERE (P_Nachname >= '{Suche}') Order by P_Nachname, P_Vorname";
             }
 
             return res;

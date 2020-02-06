@@ -33,7 +33,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_PatientenSuche = new System.Windows.Forms.TextBox();
             this.listView_Patienten = new System.Windows.Forms.ListView();
             this.columnHeader_Nachname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -69,6 +69,8 @@
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abmeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnHeader_Alter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timer_LadePatienten = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -80,7 +82,7 @@
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.textBox_PatientenSuche);
             this.groupBox1.Location = new System.Drawing.Point(12, 27);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(256, 86);
@@ -117,12 +119,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Name";
             // 
-            // textBox1
+            // textBox_PatientenSuche
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(244, 20);
-            this.textBox1.TabIndex = 0;
+            this.textBox_PatientenSuche.Location = new System.Drawing.Point(6, 32);
+            this.textBox_PatientenSuche.Name = "textBox_PatientenSuche";
+            this.textBox_PatientenSuche.Size = new System.Drawing.Size(244, 20);
+            this.textBox_PatientenSuche.TabIndex = 0;
             // 
             // listView_Patienten
             // 
@@ -130,7 +132,8 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listView_Patienten.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader_Nachname,
-            this.columnHeader_Name});
+            this.columnHeader_Name,
+            this.columnHeader_Alter});
             this.listView_Patienten.FullRowSelect = true;
             this.listView_Patienten.HideSelection = false;
             this.listView_Patienten.Location = new System.Drawing.Point(12, 119);
@@ -143,7 +146,7 @@
             // columnHeader_Nachname
             // 
             this.columnHeader_Nachname.Text = "Nachname";
-            this.columnHeader_Nachname.Width = 160;
+            this.columnHeader_Nachname.Width = 109;
             // 
             // columnHeader_Name
             // 
@@ -444,14 +447,24 @@
             // abmeldenToolStripMenuItem
             // 
             this.abmeldenToolStripMenuItem.Name = "abmeldenToolStripMenuItem";
-            this.abmeldenToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.abmeldenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.abmeldenToolStripMenuItem.Text = "Abmelden";
+            this.abmeldenToolStripMenuItem.Click += new System.EventHandler(this.AbmeldenToolStripMenuItem_Click);
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
+            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.BeendenToolStripMenuItem_Click);
+            // 
+            // columnHeader_Alter
+            // 
+            this.columnHeader_Alter.Text = "Alter";
+            // 
+            // timer_LadePatienten
+            // 
+            this.timer_LadePatienten.Tick += new System.EventHandler(this.Timer_LadePatienten_Tick);
             // 
             // MainKartei
             // 
@@ -486,7 +499,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_PatientenSuche;
         private System.Windows.Forms.ListView listView_Patienten;
         private System.Windows.Forms.ListView listView_Kartei;
         private System.Windows.Forms.Button button2;
@@ -523,6 +536,8 @@
         private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abmeldenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader columnHeader_Alter;
+        private System.Windows.Forms.Timer timer_LadePatienten;
     }
 }
 

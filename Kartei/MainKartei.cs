@@ -28,11 +28,13 @@ namespace Kartei
             _user = User;
             _loginDialog = form;
             timer_AnmeldungScreen.Enabled = true;
+            timer_LadePatienten.Enabled = true;
         }
 
         private void SuchePartient(object sender, EventArgs e)
         {
-            _patientenService.GetPatienten();
+            patienten = _patientenService.GetPatienten(textBox_PatientenSuche.Text);
+            UpdatePetientenViewe();
         }
 
         private void Neuer_Patient(object sender, EventArgs e)
@@ -55,9 +57,6 @@ namespace Kartei
         {
             timer_AnmeldungScreen.Enabled = false;
             _loginDialog.Visible = false;
-
-            patienten = _patientenService.GetPatienten();
-            UpdatePetientenViewe();
         }
 
         private void EinstellungenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -72,18 +71,42 @@ namespace Kartei
             {
                 _loginDialog.Close();
             }
+            else
+            {
+                _loginDialog.Visible = true;
+            }
             base.OnClosing(e);
         }
 
         private void UpdatePetientenViewe()
         {
+            listView_Patienten.Items.Clear();
             foreach (Patient p in patienten)
             {
                 ListViewItem lv = new ListViewItem();
                 lv.Text = p.Nachname;
                 lv.SubItems.Add(p.Vorname);
+                lv.SubItems.Add(p.Alter.ToString());
                 listView_Patienten.Items.Add(lv);
             }
+        }
+
+        private void Timer_LadePatienten_Tick(object sender, EventArgs e)
+        {
+            timer_LadePatienten.Enabled = false;
+            patienten = _patientenService.GetPatienten();
+            UpdatePetientenViewe();
+        }
+
+        private void BeendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void AbmeldenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _abmelden = true;
+            Close();
         }
     }
 }
