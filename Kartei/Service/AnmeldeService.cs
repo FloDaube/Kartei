@@ -30,33 +30,55 @@ namespace Kartei.Service
 
             using (SqlConnection connection = new SqlConnection(Connetionstring))
             {
-                connection.Open();
-                if(connection.State == ConnectionState.Open)
+                try
                 {
-                    SqlCommand command = new SqlCommand(_SQLData.getAnmeldung_Select(_user.UserID,_user.Kennwort), connection);
-                    
-                    try
+                    connection.Open();
+                    if (connection.State == ConnectionState.Open)
                     {
-                        SqlDataReader reader = command.ExecuteReader();
-                        if (reader.HasRows)
+                        SqlCommand command = new SqlCommand(_SQLData.getAnmeldung_Select(_user.UserID, _user.Kennwort), connection);
+
+                        try
                         {
-                            res = _SQLData.ReadUser(reader);
+                            SqlDataReader reader = command.ExecuteReader();
+                            if (reader.HasRows)
+                            {
+                                res = _SQLData.ReadUser(reader);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Feheler Bei der Anmeldung!");
+                        }
+                        //Lade Anmelde Daten
+                    }
+                    else if (User.UserID == "Admin" && User.Kennwort == "LocalAdmin")
+                    {
+                        res.ID = 0;
+                        res.UserID = User.UserID;
+                        res.Role = "Admin";
+                        res.Vorname = "Local";
+                        return res;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Keine Verbinndung zu Server möglich!", "Verbinndung");
+                    }
+                }
+                catch(Exception ex)
+                {
+                    if(ex.Source == ".Net SqlClient Data Provider")
+                    {
+                        if (User.UserID == "Admin" && User.Kennwort == "LocalAdmin")
+                        {
+                            res.ID = 0;
+                            res.UserID = User.UserID;
+                            res.Role = "Admin";
+                            res.Vorname = "Local";
+                            return res;
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message,"Feheler Bei der Anmeldung!");
-                    }
-                    //Lade Anmelde Daten
                 }
-                else if(User.UserID == "Admin" && User.Kennwort == "LocalAdmin")
-                {
-
-                }
-                else
-                {
-                    MessageBox.Show("","");
-                }
+                
             }
 
             return res;

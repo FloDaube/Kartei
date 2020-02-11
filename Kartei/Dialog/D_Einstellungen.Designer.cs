@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_Benutzer = new System.Windows.Forms.TabPage();
+            this.button_Speichern_Benutzer = new System.Windows.Forms.Button();
             this.label_Role = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label_Nachname = new System.Windows.Forms.Label();
@@ -44,6 +45,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage_SQLDatabase = new System.Windows.Forms.TabPage();
+            this.button_Speichern_Database = new System.Windows.Forms.Button();
             this.textBox_Kennwort2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,8 +56,6 @@
             this.textBox_Database = new System.Windows.Forms.TextBox();
             this.textBox_Server = new System.Windows.Forms.TextBox();
             this.tabPage_Admin = new System.Windows.Forms.TabPage();
-            this.button_Speichern_Benutzer = new System.Windows.Forms.Button();
-            this.button_Speichern_Database = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage_Benutzer.SuspendLayout();
             this.tabPage_SQLDatabase.SuspendLayout();
@@ -96,6 +96,15 @@
             this.tabPage_Benutzer.TabIndex = 0;
             this.tabPage_Benutzer.Text = "Benutzer";
             this.tabPage_Benutzer.UseVisualStyleBackColor = true;
+            // 
+            // button_Speichern_Benutzer
+            // 
+            this.button_Speichern_Benutzer.Location = new System.Drawing.Point(82, 186);
+            this.button_Speichern_Benutzer.Name = "button_Speichern_Benutzer";
+            this.button_Speichern_Benutzer.Size = new System.Drawing.Size(75, 23);
+            this.button_Speichern_Benutzer.TabIndex = 13;
+            this.button_Speichern_Benutzer.Text = "Speichern";
+            this.button_Speichern_Benutzer.UseVisualStyleBackColor = true;
             // 
             // label_Role
             // 
@@ -230,8 +239,20 @@
             this.tabPage_SQLDatabase.Text = "Database";
             this.tabPage_SQLDatabase.UseVisualStyleBackColor = true;
             // 
+            // button_Speichern_Database
+            // 
+            this.button_Speichern_Database.Enabled = false;
+            this.button_Speichern_Database.Location = new System.Drawing.Point(75, 133);
+            this.button_Speichern_Database.Name = "button_Speichern_Database";
+            this.button_Speichern_Database.Size = new System.Drawing.Size(75, 23);
+            this.button_Speichern_Database.TabIndex = 17;
+            this.button_Speichern_Database.Text = "Speichern";
+            this.button_Speichern_Database.UseVisualStyleBackColor = true;
+            this.button_Speichern_Database.Click += new System.EventHandler(this.Speicher_DatenabnkEinstellung);
+            // 
             // textBox_Kennwort2
             // 
+            this.textBox_Kennwort2.Enabled = false;
             this.textBox_Kennwort2.Location = new System.Drawing.Point(290, 98);
             this.textBox_Kennwort2.Name = "textBox_Kennwort2";
             this.textBox_Kennwort2.Size = new System.Drawing.Size(209, 20);
@@ -275,6 +296,7 @@
             // 
             // textBox_Kennwort1
             // 
+            this.textBox_Kennwort1.Enabled = false;
             this.textBox_Kennwort1.Location = new System.Drawing.Point(75, 98);
             this.textBox_Kennwort1.Name = "textBox_Kennwort1";
             this.textBox_Kennwort1.Size = new System.Drawing.Size(209, 20);
@@ -282,6 +304,7 @@
             // 
             // textBox_SQLUser
             // 
+            this.textBox_SQLUser.Enabled = false;
             this.textBox_SQLUser.Location = new System.Drawing.Point(75, 72);
             this.textBox_SQLUser.Name = "textBox_SQLUser";
             this.textBox_SQLUser.Size = new System.Drawing.Size(209, 20);
@@ -289,6 +312,7 @@
             // 
             // textBox_Database
             // 
+            this.textBox_Database.Enabled = false;
             this.textBox_Database.Location = new System.Drawing.Point(75, 46);
             this.textBox_Database.Name = "textBox_Database";
             this.textBox_Database.Size = new System.Drawing.Size(209, 20);
@@ -296,6 +320,7 @@
             // 
             // textBox_Server
             // 
+            this.textBox_Server.Enabled = false;
             this.textBox_Server.Location = new System.Drawing.Point(75, 20);
             this.textBox_Server.Name = "textBox_Server";
             this.textBox_Server.Size = new System.Drawing.Size(209, 20);
@@ -309,24 +334,6 @@
             this.tabPage_Admin.TabIndex = 2;
             this.tabPage_Admin.Text = "Admin";
             this.tabPage_Admin.UseVisualStyleBackColor = true;
-            // 
-            // button_Speichern_Benutzer
-            // 
-            this.button_Speichern_Benutzer.Location = new System.Drawing.Point(82, 186);
-            this.button_Speichern_Benutzer.Name = "button_Speichern_Benutzer";
-            this.button_Speichern_Benutzer.Size = new System.Drawing.Size(75, 23);
-            this.button_Speichern_Benutzer.TabIndex = 13;
-            this.button_Speichern_Benutzer.Text = "Speichern";
-            this.button_Speichern_Benutzer.UseVisualStyleBackColor = true;
-            // 
-            // button_Speichern_Database
-            // 
-            this.button_Speichern_Database.Location = new System.Drawing.Point(75, 133);
-            this.button_Speichern_Database.Name = "button_Speichern_Database";
-            this.button_Speichern_Database.Size = new System.Drawing.Size(75, 23);
-            this.button_Speichern_Database.TabIndex = 17;
-            this.button_Speichern_Database.Text = "Speichern";
-            this.button_Speichern_Database.UseVisualStyleBackColor = true;
             // 
             // D_Einstellungen
             // 
