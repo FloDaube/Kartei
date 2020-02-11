@@ -130,6 +130,8 @@ namespace Kartei
                     textBox_Vorname.Text = p.Vorname;
                     textBox_Nachname.Text = p.Nachname;
                     textBox_Geschlecht.Text = p.Geschlecht;
+                    dateTimePicker_Geburtstag.Value = p.GeborenAm;
+                    label_Alter.Text = p.Alter.ToString();
                 }
             }
         }
