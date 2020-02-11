@@ -57,8 +57,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox_Geschlecht = new System.Windows.Forms.TextBox();
             this.dateTimePicker_Geburtstag = new System.Windows.Forms.DateTimePicker();
             this.label_Alter = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -73,6 +71,8 @@
             this.abmeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer_LadePatienten = new System.Windows.Forms.Timer(this.components);
+            this.textBox_Geschlecht = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -365,26 +365,8 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Patient";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 69);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(61, 13);
-            this.label11.TabIndex = 8;
-            this.label11.Text = "Geschlecht";
-            // 
-            // textBox_Geschlecht
-            // 
-            this.textBox_Geschlecht.Enabled = false;
-            this.textBox_Geschlecht.Location = new System.Drawing.Point(71, 66);
-            this.textBox_Geschlecht.Name = "textBox_Geschlecht";
-            this.textBox_Geschlecht.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Geschlecht.TabIndex = 7;
-            // 
             // dateTimePicker_Geburtstag
             // 
-            this.dateTimePicker_Geburtstag.Enabled = false;
             this.dateTimePicker_Geburtstag.Location = new System.Drawing.Point(153, 96);
             this.dateTimePicker_Geburtstag.Name = "dateTimePicker_Geburtstag";
             this.dateTimePicker_Geburtstag.Size = new System.Drawing.Size(200, 20);
@@ -491,6 +473,23 @@
             // timer_LadePatienten
             // 
             this.timer_LadePatienten.Tick += new System.EventHandler(this.Timer_LadePatienten_Tick);
+            // 
+            // textBox_Geschlecht
+            // 
+            this.textBox_Geschlecht.Enabled = false;
+            this.textBox_Geschlecht.Location = new System.Drawing.Point(71, 66);
+            this.textBox_Geschlecht.Name = "textBox_Geschlecht";
+            this.textBox_Geschlecht.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Geschlecht.TabIndex = 7;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 69);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(61, 13);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "Geschlecht";
             // 
             // MainKartei
             // 
