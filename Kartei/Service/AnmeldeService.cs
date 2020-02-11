@@ -49,7 +49,14 @@ namespace Kartei.Service
                     }
                     //Lade Anmelde Daten
                 }
-                
+                else if(User.UserID == "Admin" && User.Kennwort == "LocalAdmin")
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("","");
+                }
             }
 
             return res;
