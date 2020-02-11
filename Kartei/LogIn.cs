@@ -30,7 +30,7 @@ namespace Kartei
             }
             else
             {
-
+                MessageBox.Show("Es konnte keine Passende Anmeldung gefunden. \nBitte überpüfen Sie ihre Eingaben", "Konnte nicht Anmelden!");
             }
         }
 
@@ -49,6 +49,17 @@ namespace Kartei
                 object s = new object();
                 EventArgs ea = new EventArgs();
                 Button_Anmelden_Click(s,ea);
+            }
+        }
+
+        private void AnmeldungsInfos_TextChanged(object sender, EventArgs e)
+        {
+            if(textBox_Username.Text.Length > 0)
+            {
+                if(textBox_Kennwort.Text.Length > 0)
+                {
+                    button_Anmelden.Enabled = true;
+                }
             }
         }
     }

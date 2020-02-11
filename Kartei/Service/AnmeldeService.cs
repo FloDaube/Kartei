@@ -42,14 +42,10 @@ namespace Kartei.Service
                         {
                             res = _SQLData.ReadUser(reader);
                         }
-                        else
-                        {
-                            MessageBox.Show("No rows found.");
-                        }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message,"Feheler Bei der Anmeldung!");
                     }
                     //Lade Anmelde Daten
                 }

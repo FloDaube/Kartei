@@ -48,7 +48,7 @@ namespace Kartei.Service
                         }
                         else
                         {
-                            MessageBox.Show("No rows found.");
+                            MessageBox.Show("Kein Patient gefunden.");
                         }
                     }
                     catch (Exception ex)

@@ -60,6 +60,7 @@
             this.textBox_Username.Name = "textBox_Username";
             this.textBox_Username.Size = new System.Drawing.Size(100, 20);
             this.textBox_Username.TabIndex = 2;
+            this.textBox_Username.TextChanged += new System.EventHandler(this.AnmeldungsInfos_TextChanged);
             this.textBox_Username.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_Username_KeyDown);
             // 
             // textBox_Kennwort
@@ -69,6 +70,7 @@
             this.textBox_Kennwort.PasswordChar = '*';
             this.textBox_Kennwort.Size = new System.Drawing.Size(100, 20);
             this.textBox_Kennwort.TabIndex = 3;
+            this.textBox_Kennwort.TextChanged += new System.EventHandler(this.AnmeldungsInfos_TextChanged);
             this.textBox_Kennwort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_Kennwort_KeyDown);
             // 
             // label3
@@ -83,6 +85,7 @@
             // 
             // button_Anmelden
             // 
+            this.button_Anmelden.Enabled = false;
             this.button_Anmelden.Location = new System.Drawing.Point(179, 79);
             this.button_Anmelden.Name = "button_Anmelden";
             this.button_Anmelden.Size = new System.Drawing.Size(75, 23);
