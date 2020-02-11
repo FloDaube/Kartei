@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Kartei.SQLDataHandler
 {
@@ -98,15 +99,23 @@ namespace Kartei.SQLDataHandler
             while (reader.Read())
             {
                 //P_ID, P_Vorname, P_Nachname, P_Geschlecht, P_GeborenAm, P_LetzterKartei
-
-                Patient _Patient = new Patient();
-                IDataRecord record = reader;
-                _Patient.ID = Convert.ToInt32(String.Format("{0}", record[0]));
-                _Patient.Vorname = String.Format("{0}", record[1]);
-                _Patient.Nachname = String.Format("{0}", record[2]);
-                _Patient.Geschlecht = String.Format("{0}", record[3]);
-                //_Patient.GeborenAm = new DateTime(Convert.ToInt32(String.Format("{0}", record[4]))); // Format Fehler
-                res.Add(_Patient);
+                try
+                {
+                    Patient _Patient = new Patient();
+                    IDataRecord record = reader;
+                    _Patient.ID = Convert.ToInt32(String.Format("{0}", record[0]));
+                    _Patient.Vorname = String.Format("{0}", record[1]);
+                    _Patient.Nachname = String.Format("{0}", record[2]);
+                    _Patient.Geschlecht = String.Format("{0}", record[3]);
+                    string[] date = String.Format("{0}", record[4]).Split('.');
+                    _Patient.GeborenAm = new DateTime(Convert.ToInt32(date[2]), Convert.ToInt32(date[1]), Convert.ToInt32(date[0]));
+                    res.Add(_Patient);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,"Fehler beim Patienten Laden!");
+                    return res;
+                }
             }
             return res;
         }
