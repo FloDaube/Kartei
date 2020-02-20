@@ -1,4 +1,4 @@
-﻿namespace Kartei.Dialog
+﻿namespace Karteien.Dialog
 {
     partial class D_Einstellungen
     {

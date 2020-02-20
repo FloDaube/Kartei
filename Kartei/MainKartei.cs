@@ -1,6 +1,6 @@
-﻿using Kartei.Dialog;
-using Kartei.Klassen;
-using Kartei.Service;
+﻿using Karteien.Dialog;
+using Karteien.Klassen;
+using Karteien.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,28 +19,24 @@ namespace Kartei
         private Form _loginDialog;
         private User _user;
         private bool _abmelden;
-        private bool _local = false;
 
         private List<Patient> patienten = new List<Patient>();
 
-        public MainKartei(User User, Form form, bool Local = false)
+        public MainKartei(User User, Form form)
         {
             InitializeComponent();
             _user = User;
             _loginDialog = form;
             timer_AnmeldungScreen.Enabled = true;
             timer_LadePatienten.Enabled = true;
-            _local = Local;
         }
 
         private void SuchePartient(object sender, EventArgs e)
         {
-            if (_local == true)
-            {
-                patienten = _patientenService.GetPatienten(textBox_PatientenSuche.Text);
-                UpdatePetientenViewe();
-            }
             
+            patienten = _patientenService.GetPatienten(textBox_PatientenSuche.Text);
+            UpdatePetientenViewe();
+             
         }
 
         private void Neuer_Patient(object sender, EventArgs e)
@@ -86,30 +82,23 @@ namespace Kartei
 
         private void UpdatePetientenViewe()
         {
-            if (_local == false)
+            listView_Patienten.Items.Clear();
+            foreach (Patient p in patienten)
             {
-                listView_Patienten.Items.Clear();
-                foreach (Patient p in patienten)
-                {
-                    ListViewItem lv = new ListViewItem();
-                    lv.Tag = p.ID;
-                    lv.Text = p.Nachname;
-                    lv.SubItems.Add(p.Vorname);
-                    lv.SubItems.Add(p.Alter.ToString());
-                    listView_Patienten.Items.Add(lv);
-                }
-            }
-
+                ListViewItem lv = new ListViewItem();
+                lv.Tag = p.ID;
+                lv.Text = p.Nachname;
+                lv.SubItems.Add(p.Vorname);
+                lv.SubItems.Add(p.Alter.ToString());
+                listView_Patienten.Items.Add(lv);
+            }                           
         }
 
         private void Timer_LadePatienten_Tick(object sender, EventArgs e)
         {
-            if(_local == false)
-            {
-                timer_LadePatienten.Enabled = false;
-                patienten = _patientenService.GetPatienten();
-                UpdatePetientenViewe();
-            }
+            timer_LadePatienten.Enabled = false;
+            patienten = _patientenService.GetPatienten();
+            UpdatePetientenViewe();
         }
 
         private void BeendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -149,5 +138,9 @@ namespace Kartei
             }
         }
 
+        private void SortiereByColumm(object sender, ColumnClickEventArgs e)
+        {
+
+        }
     }
 }

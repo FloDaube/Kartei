@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Kartei.Klassen;
-using Kartei.SQLDataHandler;
+using Karteien.Klassen;
+using Karteien.SQLDataHandler;
 
-namespace Kartei.Service
+namespace Karteien.Service
 {
     public class AnmeldeService
     {
@@ -20,13 +20,14 @@ namespace Kartei.Service
         {
             this.User = user;
             Connetionstring = _SQLData.getConnectioString();
+            //Connetionstring = @"Data Source=THINKPADT440S;" + "Initial Catalog=SEAL_KarteiProjekt;" + "User id=Test;" + "Password=123;";
         }
 
         public User User { get => _user; set => _user = value; }
 
         public User Anmelden()
         {
-            User res = new User();
+            User res = new User {ID = -2 };
 
             using (SqlConnection connection = new SqlConnection(Connetionstring))
             {
@@ -51,14 +52,6 @@ namespace Kartei.Service
                         }
                         //Lade Anmelde Daten
                     }
-                    else if (User.UserID == "Admin" && User.Kennwort == "LocalAdmin")
-                    {
-                        res.ID = 0;
-                        res.UserID = User.UserID;
-                        res.Role = "Admin";
-                        res.Vorname = "Local";
-                        return res;
-                    }
                     else
                     {
                         MessageBox.Show("Keine Verbinndung zu Server möglich!", "Verbinndung");
@@ -66,17 +59,7 @@ namespace Kartei.Service
                 }
                 catch(Exception ex)
                 {
-                    if(ex.Source == ".Net SqlClient Data Provider")
-                    {
-                        if (User.UserID == "Admin" && User.Kennwort == "LocalAdmin")
-                        {
-                            res.ID = 0;
-                            res.UserID = User.UserID;
-                            res.Role = "Admin";
-                            res.Vorname = "Local";
-                            return res;
-                        }
-                    }
+                    MessageBox.Show(ex.Message, "Fehler");
                 }
                 
             }

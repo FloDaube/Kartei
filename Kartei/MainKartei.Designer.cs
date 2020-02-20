@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_PatientenSuche = new System.Windows.Forms.TextBox();
             this.listView_Patienten = new System.Windows.Forms.ListView();
@@ -57,6 +56,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox_Geschlecht = new System.Windows.Forms.TextBox();
             this.dateTimePicker_Geburtstag = new System.Windows.Forms.DateTimePicker();
             this.label_Alter = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -71,8 +72,6 @@
             this.abmeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer_LadePatienten = new System.Windows.Forms.Timer(this.components);
-            this.textBox_Geschlecht = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -82,7 +81,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox_PatientenSuche);
             this.groupBox1.Location = new System.Drawing.Point(12, 25);
@@ -102,16 +100,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Neuer_Patient);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(175, 58);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Suche";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.SuchePartient);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -127,6 +115,7 @@
             this.textBox_PatientenSuche.Name = "textBox_PatientenSuche";
             this.textBox_PatientenSuche.Size = new System.Drawing.Size(244, 20);
             this.textBox_PatientenSuche.TabIndex = 0;
+            this.textBox_PatientenSuche.TextChanged += new System.EventHandler(this.SuchePartient);
             this.textBox_PatientenSuche.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_PatientenSuche_KeyDown);
             // 
             // listView_Patienten
@@ -145,6 +134,7 @@
             this.listView_Patienten.TabIndex = 1;
             this.listView_Patienten.UseCompatibleStateImageBehavior = false;
             this.listView_Patienten.View = System.Windows.Forms.View.Details;
+            this.listView_Patienten.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.SortiereByColumm);
             this.listView_Patienten.Click += new System.EventHandler(this.ListView_Patienten_Click);
             // 
             // columnHeader_Nachname
@@ -365,6 +355,23 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Patient";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 69);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(61, 13);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "Geschlecht";
+            // 
+            // textBox_Geschlecht
+            // 
+            this.textBox_Geschlecht.Enabled = false;
+            this.textBox_Geschlecht.Location = new System.Drawing.Point(71, 66);
+            this.textBox_Geschlecht.Name = "textBox_Geschlecht";
+            this.textBox_Geschlecht.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Geschlecht.TabIndex = 7;
+            // 
             // dateTimePicker_Geburtstag
             // 
             this.dateTimePicker_Geburtstag.Location = new System.Drawing.Point(153, 96);
@@ -452,44 +459,27 @@
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.einstellungenToolStripMenuItem.Text = "Einstellungen";
             this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.EinstellungenToolStripMenuItem_Click);
             // 
             // abmeldenToolStripMenuItem
             // 
             this.abmeldenToolStripMenuItem.Name = "abmeldenToolStripMenuItem";
-            this.abmeldenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abmeldenToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.abmeldenToolStripMenuItem.Text = "Abmelden";
             this.abmeldenToolStripMenuItem.Click += new System.EventHandler(this.AbmeldenToolStripMenuItem_Click);
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.BeendenToolStripMenuItem_Click);
             // 
             // timer_LadePatienten
             // 
             this.timer_LadePatienten.Tick += new System.EventHandler(this.Timer_LadePatienten_Tick);
-            // 
-            // textBox_Geschlecht
-            // 
-            this.textBox_Geschlecht.Enabled = false;
-            this.textBox_Geschlecht.Location = new System.Drawing.Point(71, 66);
-            this.textBox_Geschlecht.Name = "textBox_Geschlecht";
-            this.textBox_Geschlecht.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Geschlecht.TabIndex = 7;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 69);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(61, 13);
-            this.label11.TabIndex = 8;
-            this.label11.Text = "Geschlecht";
             // 
             // MainKartei
             // 
@@ -523,7 +513,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_PatientenSuche;
         private System.Windows.Forms.ListView listView_Patienten;

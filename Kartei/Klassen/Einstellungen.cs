@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kartei.Klassen
+namespace Karteien.Klassen
 {
     static class Einstellungen
     {
-        public static string Host = "localhost";
-        public static string DataBase = "SAEL_KarteiProjekt";
-        public static string SQLUser = "SAEL_DB_User";
-        public static string Passwort = "KdycUvcYfzYXdJ1YVBPi";
+        public static string Host = "THINKPADT440S";
+        public static string DataBase = "";
+        public static string SQLUser = "Test";
+        public static string Passwort = "123";
     }
 }

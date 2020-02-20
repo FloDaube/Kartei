@@ -1,4 +1,4 @@
-﻿using Kartei.Klassen;
+﻿using Karteien.Klassen;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kartei.SQLDataHandler
+namespace Karteien.SQLDataHandler
 {
     public class SQLData
     {
@@ -19,7 +19,9 @@ namespace Kartei.SQLDataHandler
 
         public string getConnectioString()
         {
-            return $"Data Source = '{Einstellungen.Host}'; Initial Catalog = '{Einstellungen.DataBase}'; User ID = '{Einstellungen.SQLUser}'; Password = '{Einstellungen.Passwort}'";
+            //return $"Server = {Einstellungen.Host}; Database = {Einstellungen.DataBase}; User Id = {Einstellungen.SQLUser}; Password = {Einstellungen.Passwort};";
+            //return $"Data Source = {Einstellungen.Host}; Initial Catalog = {Einstellungen.DataBase}; User ID = {Einstellungen.SQLUser}; Password = {Einstellungen.Passwort};";
+            return $"Data Source = '{Einstellungen.Host}'; Initial Catalog = '{Einstellungen.DataBase}'; User ID = '{Einstellungen.SQLUser}'; Password = '{Einstellungen.Passwort}';";
         }
 
         #region Login Daten
@@ -117,6 +119,15 @@ namespace Kartei.SQLDataHandler
                     return res;
                 }
             }
+            return res;
+        }
+
+        public List<P_Kartei> GetKartei()
+        {
+            List<P_Kartei> res = new List<P_Kartei>();
+
+
+
             return res;
         }
 

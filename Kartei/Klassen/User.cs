@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Kartei.Service;
+using Karteien.Service;
 
-namespace Kartei.Klassen
+namespace Karteien.Klassen
 {
     public class User
     {

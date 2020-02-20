@@ -1,5 +1,5 @@
-﻿using Kartei.Klassen;
-using Kartei.SQLDataHandler;
+﻿using Karteien.Klassen;
+using Karteien.SQLDataHandler;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kartei.Service
+namespace Karteien.Service
 {
     public class PatientenService
     {

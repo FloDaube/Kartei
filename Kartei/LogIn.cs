@@ -1,4 +1,4 @@
-﻿using Kartei.Klassen;
+﻿using Karteien.Klassen;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,8 +25,16 @@ namespace Kartei
             {
                 //Settings Laden
                 var appSettings = ConfigurationManager.AppSettings;
-                Einstellungen.Host = appSettings[0] ?? "Not Found";
-                Einstellungen.DataBase = appSettings[1] ?? "Not Found";
+                string Host = appSettings[0] ?? "Not Found";
+                if(Host != "")
+                {
+                    Einstellungen.Host = Host;
+                }
+                string DB = appSettings[1] ?? "Not Found";
+                if (DB != "")
+                {
+                    Einstellungen.DataBase = DB;
+                }
                 string User = appSettings[2] ?? "Not Found";
                 if(User != "")
                 {
@@ -47,10 +55,9 @@ namespace Kartei
                 MainKartei mainKartei = new MainKartei(_user,this);
                 mainKartei.Show();
             }
-            else if (_user.ID == 0 && _user.Vorname == "Local")
+            else if(_user.ID == -2)
             {
-                MainKartei mainKartei = new MainKartei(_user, this,true);
-                mainKartei.Show();
+
             }
             else
             {

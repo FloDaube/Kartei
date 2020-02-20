@@ -1,4 +1,4 @@
-﻿using Kartei.Klassen;
+﻿using Karteien.Klassen;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kartei.Dialog
+namespace Karteien.Dialog
 {
     public partial class D_Einstellungen : Form
     {
