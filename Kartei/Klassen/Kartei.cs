@@ -33,5 +33,8 @@ namespace Karteien.Klassen
         public DateTime Datum { get => datum; set => datum = value; }
         public string Beschwerde { get => beschwerde; set => beschwerde = value; }
         public bool Krankmeldung { get => krankmeldung; set => krankmeldung = value; }
+        public DateTime KrankmeldungVon { get => krankmeldungVon; set => krankmeldungVon = value; }
+        public DateTime KrankmeldungBis { get => krankmeldungBis; set => krankmeldungBis = value; }
+        public string Diagnose { get => diagnose; set => diagnose = value; }
     }
 }

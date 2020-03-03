@@ -63,5 +63,41 @@ namespace Karteien.Service
             return res;
         }
 
+        public List<P_Kartei> getKarteiOfPatient(int patient_ID)
+        {
+            var res = new List<P_Kartei>();
+
+            using (SqlConnection connection = new SqlConnection(Connetionstring))
+            {
+                connection.Open();
+                if (connection.State == ConnectionState.Open)
+                {
+                    //SqlCommand command = new SqlCommand(_SQLData.getAnmeldung_Select(_user.UserID, _user.Kennwort), connection);
+                    SqlCommand command = new SqlCommand(_SQLData.getKarteiList_Select(patient_ID), connection);
+
+                    try
+                    {
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            //res = _SQLData.ReadUser(reader);
+                            res = _SQLData.ReadKarteiList(reader);
+                        }
+                        else
+                        {
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    //Lade Anmelde Daten
+                }
+
+            }
+
+            return res;
+        }
+
     }
 }

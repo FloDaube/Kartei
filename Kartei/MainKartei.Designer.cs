@@ -38,7 +38,7 @@
             this.columnHeader_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_Alter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listView_Kartei = new System.Windows.Forms.ListView();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_Datum = new System.Windows.Forms.DateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox_WiderholungsKarteiID = new System.Windows.Forms.TextBox();
@@ -46,15 +46,15 @@
             this.label9 = new System.Windows.Forms.Label();
             this.dateTimePicker_KMBis = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_KMVon = new System.Windows.Forms.DateTimePicker();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Rezept = new System.Windows.Forms.CheckBox();
             this.checkBox_Krankmeldung = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox_Beschwerde = new System.Windows.Forms.RichTextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox_Arzt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox_Diagnose = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox_Geschlecht = new System.Windows.Forms.TextBox();
@@ -72,6 +72,11 @@
             this.abmeldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer_LadePatienten = new System.Windows.Forms.Timer(this.components);
+            this.columnHeader_Kurzbeschreibung = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader_Datum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button_Speichern = new System.Windows.Forms.ToolStripMenuItem();
+            this.Button_Abbrechen = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer_SpeicherButtonAkktualiesieren = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -130,7 +135,7 @@
             this.listView_Patienten.HideSelection = false;
             this.listView_Patienten.Location = new System.Drawing.Point(12, 117);
             this.listView_Patienten.Name = "listView_Patienten";
-            this.listView_Patienten.Size = new System.Drawing.Size(256, 725);
+            this.listView_Patienten.Size = new System.Drawing.Size(256, 712);
             this.listView_Patienten.TabIndex = 1;
             this.listView_Patienten.UseCompatibleStateImageBehavior = false;
             this.listView_Patienten.View = System.Windows.Forms.View.Details;
@@ -150,26 +155,32 @@
             // columnHeader_Alter
             // 
             this.columnHeader_Alter.Text = "Alter";
+            this.columnHeader_Alter.Width = 50;
             // 
             // listView_Kartei
             // 
             this.listView_Kartei.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.listView_Kartei.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader_Kurzbeschreibung,
+            this.columnHeader_Datum});
+            this.listView_Kartei.FullRowSelect = true;
             this.listView_Kartei.HideSelection = false;
             this.listView_Kartei.Location = new System.Drawing.Point(274, 153);
             this.listView_Kartei.Name = "listView_Kartei";
-            this.listView_Kartei.Size = new System.Drawing.Size(359, 699);
+            this.listView_Kartei.Size = new System.Drawing.Size(359, 676);
             this.listView_Kartei.TabIndex = 2;
             this.listView_Kartei.UseCompatibleStateImageBehavior = false;
             this.listView_Kartei.View = System.Windows.Forms.View.Details;
+            this.listView_Kartei.Click += new System.EventHandler(this.Kartei_Click);
             // 
-            // dateTimePicker1
+            // dateTimePicker_Datum
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(504, 29);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(76, 20);
-            this.dateTimePicker1.TabIndex = 3;
+            this.dateTimePicker_Datum.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_Datum.Location = new System.Drawing.Point(504, 28);
+            this.dateTimePicker_Datum.Name = "dateTimePicker_Datum";
+            this.dateTimePicker_Datum.Size = new System.Drawing.Size(76, 20);
+            this.dateTimePicker_Datum.TabIndex = 3;
             // 
             // groupBox2
             // 
@@ -182,19 +193,19 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.dateTimePicker_KMBis);
             this.groupBox2.Controls.Add(this.dateTimePicker_KMVon);
-            this.groupBox2.Controls.Add(this.checkBox2);
+            this.groupBox2.Controls.Add(this.checkBox_Rezept);
             this.groupBox2.Controls.Add(this.checkBox_Krankmeldung);
             this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.richTextBox2);
+            this.groupBox2.Controls.Add(this.richTextBox_Beschwerde);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.textBox_Arzt);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.richTextBox1);
-            this.groupBox2.Controls.Add(this.dateTimePicker1);
+            this.groupBox2.Controls.Add(this.richTextBox_Diagnose);
+            this.groupBox2.Controls.Add(this.dateTimePicker_Datum);
             this.groupBox2.Location = new System.Drawing.Point(639, 20);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(586, 827);
+            this.groupBox2.Size = new System.Drawing.Size(586, 809);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Kartei";
@@ -202,7 +213,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 88);
+            this.label10.Location = new System.Drawing.Point(6, 87);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(70, 13);
             this.label10.TabIndex = 18;
@@ -211,15 +222,16 @@
             // textBox_WiderholungsKarteiID
             // 
             this.textBox_WiderholungsKarteiID.Enabled = false;
-            this.textBox_WiderholungsKarteiID.Location = new System.Drawing.Point(82, 85);
+            this.textBox_WiderholungsKarteiID.Location = new System.Drawing.Point(82, 84);
             this.textBox_WiderholungsKarteiID.Name = "textBox_WiderholungsKarteiID";
             this.textBox_WiderholungsKarteiID.Size = new System.Drawing.Size(100, 20);
             this.textBox_WiderholungsKarteiID.TabIndex = 17;
+            this.textBox_WiderholungsKarteiID.DoubleClick += new System.EventHandler(this.OeffneVorherigeKartei);
             // 
             // checkBox_WiederholVorgang
             // 
             this.checkBox_WiederholVorgang.AutoSize = true;
-            this.checkBox_WiederholVorgang.Location = new System.Drawing.Point(4, 62);
+            this.checkBox_WiederholVorgang.Location = new System.Drawing.Point(4, 61);
             this.checkBox_WiederholVorgang.Name = "checkBox_WiederholVorgang";
             this.checkBox_WiederholVorgang.Size = new System.Drawing.Size(121, 17);
             this.checkBox_WiederholVorgang.TabIndex = 16;
@@ -230,7 +242,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(312, 380);
+            this.label9.Location = new System.Drawing.Point(312, 303);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(20, 13);
             this.label9.TabIndex = 15;
@@ -239,7 +251,7 @@
             // dateTimePicker_KMBis
             // 
             this.dateTimePicker_KMBis.Enabled = false;
-            this.dateTimePicker_KMBis.Location = new System.Drawing.Point(338, 376);
+            this.dateTimePicker_KMBis.Location = new System.Drawing.Point(338, 299);
             this.dateTimePicker_KMBis.Name = "dateTimePicker_KMBis";
             this.dateTimePicker_KMBis.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker_KMBis.TabIndex = 14;
@@ -247,25 +259,26 @@
             // dateTimePicker_KMVon
             // 
             this.dateTimePicker_KMVon.Enabled = false;
-            this.dateTimePicker_KMVon.Location = new System.Drawing.Point(106, 376);
+            this.dateTimePicker_KMVon.Location = new System.Drawing.Point(106, 299);
             this.dateTimePicker_KMVon.Name = "dateTimePicker_KMVon";
             this.dateTimePicker_KMVon.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker_KMVon.TabIndex = 13;
             // 
-            // checkBox2
+            // checkBox_Rezept
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(6, 402);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(60, 17);
-            this.checkBox2.TabIndex = 12;
-            this.checkBox2.Text = "Rezept";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox_Rezept.AutoSize = true;
+            this.checkBox_Rezept.Location = new System.Drawing.Point(6, 325);
+            this.checkBox_Rezept.Name = "checkBox_Rezept";
+            this.checkBox_Rezept.Size = new System.Drawing.Size(60, 17);
+            this.checkBox_Rezept.TabIndex = 12;
+            this.checkBox_Rezept.Text = "Rezept";
+            this.checkBox_Rezept.UseVisualStyleBackColor = true;
+            this.checkBox_Rezept.Visible = false;
             // 
             // checkBox_Krankmeldung
             // 
             this.checkBox_Krankmeldung.AutoSize = true;
-            this.checkBox_Krankmeldung.Location = new System.Drawing.Point(6, 379);
+            this.checkBox_Krankmeldung.Location = new System.Drawing.Point(6, 302);
             this.checkBox_Krankmeldung.Name = "checkBox_Krankmeldung";
             this.checkBox_Krankmeldung.Size = new System.Drawing.Size(94, 17);
             this.checkBox_Krankmeldung.TabIndex = 11;
@@ -276,42 +289,42 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 186);
+            this.label8.Location = new System.Drawing.Point(6, 109);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(66, 13);
             this.label8.TabIndex = 10;
             this.label8.Text = "Beschwerde";
             // 
-            // richTextBox2
+            // richTextBox_Beschwerde
             // 
-            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.richTextBox_Beschwerde.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox2.Location = new System.Drawing.Point(6, 202);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(574, 171);
-            this.richTextBox2.TabIndex = 9;
-            this.richTextBox2.Text = "";
+            this.richTextBox_Beschwerde.Location = new System.Drawing.Point(6, 125);
+            this.richTextBox_Beschwerde.Name = "richTextBox_Beschwerde";
+            this.richTextBox_Beschwerde.Size = new System.Drawing.Size(574, 171);
+            this.richTextBox_Beschwerde.TabIndex = 9;
+            this.richTextBox_Beschwerde.Text = "";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1, 20);
+            this.label4.Location = new System.Drawing.Point(1, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(28, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Arzt:";
             // 
-            // textBox2
+            // textBox_Arzt
             // 
-            this.textBox2.Location = new System.Drawing.Point(4, 36);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 7;
+            this.textBox_Arzt.Location = new System.Drawing.Point(4, 35);
+            this.textBox_Arzt.Name = "textBox_Arzt";
+            this.textBox_Arzt.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Arzt.TabIndex = 7;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(457, 32);
+            this.label3.Location = new System.Drawing.Point(457, 31);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 6;
@@ -320,22 +333,22 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 422);
+            this.label2.Location = new System.Drawing.Point(6, 345);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Diagnose";
             // 
-            // richTextBox1
+            // richTextBox_Diagnose
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.richTextBox_Diagnose.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(6, 438);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(574, 363);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
+            this.richTextBox_Diagnose.Location = new System.Drawing.Point(6, 361);
+            this.richTextBox_Diagnose.Name = "richTextBox_Diagnose";
+            this.richTextBox_Diagnose.Size = new System.Drawing.Size(574, 436);
+            this.richTextBox_Diagnose.TabIndex = 4;
+            this.richTextBox_Diagnose.Text = "";
             // 
             // groupBox3
             // 
@@ -439,7 +452,9 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dateiToolStripMenuItem});
+            this.dateiToolStripMenuItem,
+            this.button_Speichern,
+            this.Button_Abbrechen});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1237, 24);
@@ -481,6 +496,36 @@
             // 
             this.timer_LadePatienten.Tick += new System.EventHandler(this.Timer_LadePatienten_Tick);
             // 
+            // columnHeader_Kurzbeschreibung
+            // 
+            this.columnHeader_Kurzbeschreibung.Text = "Kurbeschreibung";
+            this.columnHeader_Kurzbeschreibung.Width = 250;
+            // 
+            // columnHeader_Datum
+            // 
+            this.columnHeader_Datum.Text = "Datum";
+            this.columnHeader_Datum.Width = 100;
+            // 
+            // button_Speichern
+            // 
+            this.button_Speichern.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.button_Speichern.Name = "button_Speichern";
+            this.button_Speichern.Size = new System.Drawing.Size(71, 20);
+            this.button_Speichern.Text = "Speichern";
+            this.button_Speichern.Visible = false;
+            // 
+            // Button_Abbrechen
+            // 
+            this.Button_Abbrechen.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.Button_Abbrechen.Name = "Button_Abbrechen";
+            this.Button_Abbrechen.Size = new System.Drawing.Size(77, 20);
+            this.Button_Abbrechen.Text = "Abbrechen";
+            this.Button_Abbrechen.Visible = false;
+            // 
+            // timer_SpeicherButtonAkktualiesieren
+            // 
+            this.timer_SpeicherButtonAkktualiesieren.Tick += new System.EventHandler(this.timer_SpeicherButtonAkktualiesieren_Tick);
+            // 
             // MainKartei
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,16 +563,16 @@
         private System.Windows.Forms.ListView listView_Patienten;
         private System.Windows.Forms.ListView listView_Kartei;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_Datum;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ColumnHeader columnHeader_Nachname;
         private System.Windows.Forms.ColumnHeader columnHeader_Name;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox_Arzt;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBox_Diagnose;
         private System.Windows.Forms.DateTimePicker dateTimePicker_Geburtstag;
         private System.Windows.Forms.Label label_Alter;
         private System.Windows.Forms.Label label7;
@@ -535,12 +580,12 @@
         private System.Windows.Forms.TextBox textBox_Vorname;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBox_Beschwerde;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DateTimePicker dateTimePicker_KMBis;
         private System.Windows.Forms.DateTimePicker dateTimePicker_KMVon;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox_Rezept;
         private System.Windows.Forms.CheckBox checkBox_Krankmeldung;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox_WiderholungsKarteiID;
@@ -555,6 +600,11 @@
         private System.Windows.Forms.Timer timer_LadePatienten;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox_Geschlecht;
+        private System.Windows.Forms.ColumnHeader columnHeader_Kurzbeschreibung;
+        private System.Windows.Forms.ColumnHeader columnHeader_Datum;
+        private System.Windows.Forms.ToolStripMenuItem button_Speichern;
+        private System.Windows.Forms.ToolStripMenuItem Button_Abbrechen;
+        private System.Windows.Forms.Timer timer_SpeicherButtonAkktualiesieren;
     }
 }
 
