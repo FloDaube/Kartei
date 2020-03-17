@@ -201,15 +201,7 @@ namespace Kartei
 
         private void UpdateKarteiView()
         {
-            textBox_Arzt.Text = "";
-            dateTimePicker_Datum.Value = DateTime.Today;
-            checkBox_WiederholVorgang.Checked = false;
-            textBox_WiderholungsKarteiID.Text = "";
-            richTextBox_Beschwerde.Text = "";
-            checkBox_Krankmeldung.Checked = false;
-            dateTimePicker_KMVon.Value = DateTime.Today;
-            dateTimePicker_KMBis.Value = DateTime.Today;
-            richTextBox_Diagnose.Text = "";
+            KarteiLeeren();
 
             listView_Kartei.Items.Clear();
             foreach (P_Kartei k in karteien)
@@ -237,6 +229,7 @@ namespace Kartei
                 {
                     textBox_Arzt.Text = k.Arzt;
                     dateTimePicker_Datum.Value = k.Datum;
+                    richTextBox_Kurzbeschreibung.Text = k.Kurzbeschreibung1;
                     if (k.VorherigeID == -1)
                     {
                         checkBox_WiederholVorgang.Checked = false;
@@ -272,6 +265,7 @@ namespace Kartei
                 {
                     textBox_Arzt.Text = k.Arzt;
                     dateTimePicker_Datum.Value = k.Datum;
+                    richTextBox_Kurzbeschreibung.Text = k.Kurzbeschreibung1;
                     if (k.VorherigeID == -1)
                     {
                         checkBox_WiederholVorgang.Checked = false;
@@ -403,14 +397,65 @@ namespace Kartei
 
         private void button_KarteiSpeichern_Click(object sender, EventArgs e)
         {
-            if(OpenKarteiID == -1)
+            if (OpenKarteiID == -1)
             {
                 //Insert
+                P_Kartei k = new P_Kartei();
+                k.Arzt = textBox_Arzt.Text;
+                k.Datum = dateTimePicker_Datum.Value;
+                k.Kurzbeschreibung1 = richTextBox_Kurzbeschreibung.Text;
+                if (textBox_WiderholungsKarteiID.Text.Length > 0)
+                {
+                    k.VorherigeID = Convert.ToInt32(textBox_WiderholungsKarteiID.Text);
+                }
+                else
+                { 
+                    k.VorherigeID = -1;
+                }
+                k.Krankmeldung = checkBox_Krankmeldung.Checked;
+                k.KrankmeldungVon = dateTimePicker_KMVon.Value;
+                k.KrankmeldungBis = dateTimePicker_KMBis.Value;
+                k.Beschwerde = richTextBox_Beschwerde.Text;
+                k.Diagnose = richTextBox_Diagnose.Text;
+                k.Patient_ID = OpenPatientID;
+                _patientenService.InsertKartei(k);
+                karteien = _patientenService.getKarteiOfPatient(OpenPatientID);
+                UpdateKarteiView();
             }
             else
             {
                 //Update
             }
+        }
+
+        private void button_NeueKartei_Click(object sender, EventArgs e)
+        {
+            OpenKarteiID = -1;
+            KarteiLeeren();
+            textBox_Arzt.Text = _user.Nachname;
+        }
+
+        void KarteiLeeren()
+        {
+            textBox_Arzt.Text = "";
+            dateTimePicker_Datum.Value = DateTime.Today;
+            checkBox_WiederholVorgang.Checked = false;
+            textBox_WiderholungsKarteiID.Text = "";
+            richTextBox_Beschwerde.Text = "";
+            checkBox_Krankmeldung.Checked = false;
+            dateTimePicker_KMVon.Value = DateTime.Today;
+            dateTimePicker_KMBis.Value = DateTime.Today;
+            richTextBox_Diagnose.Text = "";
+            richTextBox_Kurzbeschreibung.Text = "";
+        }
+
+        private void button_NachfolgeKartei_Click(object sender, EventArgs e)
+        {
+            OpenKarteiID = -1;
+            KarteiLeeren();
+            textBox_WiderholungsKarteiID.Text = listView_Kartei.SelectedItems[0].Tag.ToString();
+            checkBox_WiederholVorgang.Checked = true;
+            textBox_Arzt.Text = _user.Nachname;
         }
     }
 }

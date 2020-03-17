@@ -155,6 +155,61 @@ namespace Karteien.Service
 
             return res;
         }
+        public bool InsertKartei(P_Kartei kartei)
+        {
+            bool res = false;
 
+            using (SqlConnection connection = new SqlConnection(Connetionstring))
+            {
+                connection.Open();
+                if (connection.State == ConnectionState.Open)
+                {
+                    //SqlCommand command = new SqlCommand(_SQLData.getAnmeldung_Select(_user.UserID, _user.Kennwort), connection);
+                    SqlCommand command = new SqlCommand(_SQLData.InsertKartei(kartei), connection);
+                    try
+                    {
+                        var t = command.ExecuteReader();
+                        if (t.RecordsAffected > 0)
+                        {
+                            res = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    //Lade Anmelde Daten
+                }
+            }
+            return res;
+        }
+        public bool UpdateKartei(P_Kartei kartei)
+        {
+            bool res = false;
+
+            using (SqlConnection connection = new SqlConnection(Connetionstring))
+            {
+                connection.Open();
+                if (connection.State == ConnectionState.Open)
+                {
+                    //SqlCommand command = new SqlCommand(_SQLData.getAnmeldung_Select(_user.UserID, _user.Kennwort), connection);
+                    SqlCommand command = new SqlCommand(_SQLData.UpdateKartei(kartei), connection);
+                    try
+                    {
+                        var t = command.ExecuteReader();
+                        if (t.RecordsAffected > 0)
+                        {
+                            res = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    //Lade Anmelde Daten
+                }
+            }
+            return res;
+        }
     }
 }
