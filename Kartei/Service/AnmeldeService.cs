@@ -66,5 +66,44 @@ namespace Karteien.Service
 
             return res;
         }
+
+        public bool UpdateKennwort()
+        {
+            bool res = false;
+            using (SqlConnection connection = new SqlConnection(Connetionstring))
+            {
+                try
+                {
+                    connection.Open();
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        SqlCommand command = new SqlCommand(_SQLData.GetUpdateKennwortString(_user), connection);
+
+                        try
+                        {
+                            SqlDataReader reader = command.ExecuteReader();
+                            if (reader.RecordsAffected > 0)
+                            {
+                                res = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Feheler Bei der Anmeldung!");
+                        }
+                        //Lade Anmelde Daten
+                    }
+                    else
+                    {
+                        MessageBox.Show("Keine Verbinndung zu Server möglich!", "Verbinndung");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Fehler");
+                }
+            }
+            return res;
+        }
     }
 }

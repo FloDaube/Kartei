@@ -76,12 +76,6 @@
     <Compile Include="Dialog\D_Einstellungen.Designer.cs">
       <DependentUpon>D_Einstellungen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\NeuerPatient.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialog\NeuerPatient.Designer.cs">
-      <DependentUpon>NeuerPatient.cs</DependentUpon>
-    </Compile>
     <Compile Include="Klassen\Einstellungen.cs" />
     <Compile Include="Klassen\Kartei.cs" />
     <Compile Include="Klassen\Patient.cs" />

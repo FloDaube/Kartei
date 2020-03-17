@@ -1,4 +1,5 @@
 ﻿using Karteien.Klassen;
+using Karteien.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,6 +56,23 @@ namespace Karteien.Dialog
             appSettings.Set("User", Einstellungen.SQLUser);
             appSettings.Set("Kennwort", Einstellungen.Passwort);
 
+        }
+
+        private void button_Speichern_Benutzer_Click(object sender, EventArgs e)
+        {
+            if (textBox_UserKennwort1.Text == textBox_UserKennwort2.Text)
+            {
+                _User.Kennwort = textBox_UserKennwort1.Text;
+                AnmeldeService service = new AnmeldeService(_User);
+                if (service.UpdateKennwort())
+                {
+                    MessageBox.Show("Kennwort Aktualiesiert!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Kennworter müssen übereinstimmen!","Kennwort");
+            }
         }
     }
 }

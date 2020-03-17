@@ -17,7 +17,7 @@ namespace Karteien.Klassen
         
         public string Vorname { get => _vorname; set => _vorname = value; }
         public string Nachname { get => _nachname; set => _nachname = value; }
-        public int Alter { get => DateTime.Today.Year - _geborenAm.Year; }
+        public int Alter { get => Alter_Berechner(_geborenAm); }
         public int ID { get => _iD; set => _iD = value; }
         public string Geschlecht { get => _geschlecht; set => _geschlecht = value; }
         public DateTime GeborenAm { get => _geborenAm; set => _geborenAm = value; }
@@ -46,6 +46,15 @@ namespace Karteien.Klassen
             this.Geschlecht = "";
             this.GeborenAm = DateTime.Today;
         }
-
+        private int Alter_Berechner(DateTime Bday)
+        {
+            var now = DateTime.Today;
+            int alter = now.Year - Bday.Year;
+            if (now.Month < Bday.Month && now.Day < Bday.Day)
+            {
+                --alter;
+            }
+            return alter;
+        }
     }
 }

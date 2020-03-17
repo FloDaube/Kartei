@@ -21,6 +21,7 @@ namespace Kartei
         private bool _abmelden;
         private bool AenderungSpeichern = false;
         private int OpenKarteiID = 0;
+        private int OpenPatientID = -1;
 
         private List<Patient> patienten = new List<Patient>();
         private List<P_Kartei> karteien = new List<P_Kartei>();
@@ -45,7 +46,15 @@ namespace Kartei
 
         private void Neuer_Patient(object sender, EventArgs e)
         {
+            OpenPatientID = -1;
+            textBox_Vorname.Text = "";
+            textBox_Nachname.Text = "";
+            textBox_Geschlecht.Text = "";
+            dateTimePicker_Geburtstag.Value = DateTime.Today;
+            label_Alter.Text = "";
 
+            karteien = _patientenService.getKarteiOfPatient(OpenPatientID);
+            UpdateKarteiView();
         }
 
         private void Krankmeldung(object sender, EventArgs e)
@@ -56,7 +65,6 @@ namespace Kartei
 
         private void checkBox_WiederholVorgang_CheckedChanged(object sender, EventArgs e)
         {
-            AenderungSpeichern = true;
             textBox_WiderholungsKarteiID.Enabled = checkBox_WiederholVorgang.Checked;
         }
 
@@ -128,25 +136,81 @@ namespace Kartei
         }
 
         private void ListView_Patienten_Click(object sender, EventArgs e)
-        {            
-            int lv = Convert.ToInt32(listView_Patienten.SelectedItems[0].Tag);
-            foreach (Patient p in patienten)
+        {
+            if (AenderungSpeichern)
             {
-                if (p.ID == lv)
+                if(MessageBox.Show("Speichern?","Speichern",MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    textBox_Vorname.Text = p.Vorname;
-                    textBox_Nachname.Text = p.Nachname;
-                    textBox_Geschlecht.Text = p.Geschlecht;
-                    dateTimePicker_Geburtstag.Value = p.GeborenAm;
-                    label_Alter.Text = p.Alter.ToString();
+                    ///Updatebefehlt
+                    ///
+                    AenderungSpeichern = false;
+                    int lv = Convert.ToInt32(listView_Patienten.SelectedItems[0].Tag);
+                    foreach (Patient p in patienten)
+                    {
+                        if (p.ID == lv)
+                        {
+                            OpenPatientID = lv;
+                            textBox_Vorname.Text = p.Vorname;
+                            textBox_Nachname.Text = p.Nachname;
+                            textBox_Geschlecht.Text = p.Geschlecht;
+                            dateTimePicker_Geburtstag.Value = p.GeborenAm;
+                            label_Alter.Text = p.Alter.ToString();
+                        }
+                    }
+                    karteien = _patientenService.getKarteiOfPatient(lv);
+                    UpdateKarteiView();
+                }
+                else
+                {
+                    AenderungSpeichern = false;
+                    int lv = Convert.ToInt32(listView_Patienten.SelectedItems[0].Tag);
+                    foreach (Patient p in patienten)
+                    {
+                        if (p.ID == lv)
+                        {
+                            textBox_Vorname.Text = p.Vorname;
+                            textBox_Nachname.Text = p.Nachname;
+                            textBox_Geschlecht.Text = p.Geschlecht;
+                            dateTimePicker_Geburtstag.Value = p.GeborenAm;
+                            label_Alter.Text = p.Alter.ToString();
+                        }
+                    }
+                    karteien = _patientenService.getKarteiOfPatient(lv);
+                    UpdateKarteiView();
                 }
             }
-            karteien = _patientenService.getKarteiOfPatient(lv);
-            UpdateKarteiView();
+            else
+            {
+                int lv = Convert.ToInt32(listView_Patienten.SelectedItems[0].Tag);
+                foreach (Patient p in patienten)
+                {
+                    if (p.ID == lv)
+                    {
+                        OpenPatientID = lv;
+                        textBox_Vorname.Text = p.Vorname;
+                        textBox_Nachname.Text = p.Nachname;
+                        textBox_Geschlecht.Text = p.Geschlecht;
+                        dateTimePicker_Geburtstag.Value = p.GeborenAm;
+                        label_Alter.Text = p.Alter.ToString();
+                    }
+                }
+                karteien = _patientenService.getKarteiOfPatient(lv);
+                UpdateKarteiView();
+            }
         }
 
         private void UpdateKarteiView()
         {
+            textBox_Arzt.Text = "";
+            dateTimePicker_Datum.Value = DateTime.Today;
+            checkBox_WiederholVorgang.Checked = false;
+            textBox_WiderholungsKarteiID.Text = "";
+            richTextBox_Beschwerde.Text = "";
+            checkBox_Krankmeldung.Checked = false;
+            dateTimePicker_KMVon.Value = DateTime.Today;
+            dateTimePicker_KMBis.Value = DateTime.Today;
+            richTextBox_Diagnose.Text = "";
+
             listView_Kartei.Items.Clear();
             foreach (P_Kartei k in karteien)
             {
@@ -154,7 +218,6 @@ namespace Kartei
                 lv.Tag = k.ID;
                 lv.Text = k.Kurzbeschreibung1;
                 lv.SubItems.Add(Convert.ToString(k.Datum));
-
                 listView_Kartei.Items.Add(lv);
             }
             
@@ -192,7 +255,7 @@ namespace Kartei
                     }
                     richTextBox_Diagnose.Text = k.Diagnose;
                 }
-                else if (AenderungSpeichern)
+                else if (lv == k.ID && AenderungSpeichern)
                 {
 
                 }
@@ -205,7 +268,7 @@ namespace Kartei
             OpenKarteiID = lv;
             foreach (P_Kartei k in karteien)
             {
-                if (lv == k.ID && AenderungSpeichern == false)
+                if (lv == k.ID /*&& AenderungSpeichern == false*/)
                 {
                     textBox_Arzt.Text = k.Arzt;
                     dateTimePicker_Datum.Value = k.Datum;
@@ -237,7 +300,7 @@ namespace Kartei
 
         private void timer_SpeicherButtonAkktualiesieren_Tick(object sender, EventArgs e)
         {
-            if (OpenKarteiID > 0)
+            /*if (OpenKarteiID > 0)
             {
                 //Überprüfe ob etwas verändert wurde
                 foreach (P_Kartei k in karteien)
@@ -279,8 +342,75 @@ namespace Kartei
                     button_Speichern.Visible = false;
                     Button_Abbrechen.Visible = false;
                 }
-            }
+            }*/
             
+        }
+
+        private void dateTimePicker_Geburtstag_ValueChanged(object sender, EventArgs e)
+        {
+            label_Alter.Text = Alter_Berechner(dateTimePicker_Geburtstag.Value).ToString();
+        }
+
+        private int Alter_Berechner(DateTime Bday)
+        {
+            var now = DateTime.Today;
+            int alter = now.Year - Bday.Year;
+            if (now.Month < Bday.Month && now.Day < Bday.Day)
+            {
+                --alter;
+            }
+            return alter;
+        }
+
+        private void button_PatientSpeichern_Click(object sender, EventArgs e)
+        {
+            if (OpenPatientID == -1)
+            {
+                //Insert
+                Patient p = new Patient();
+                p.Vorname = textBox_Vorname.Text;
+                p.Nachname = textBox_Nachname.Text;
+                p.Geschlecht = textBox_Geschlecht.Text;
+                p.GeborenAm = dateTimePicker_Geburtstag.Value;
+                _patientenService.InsertPatient(p);
+                textBox_Arzt.Text = "";
+                dateTimePicker_Datum.Value = DateTime.Today;
+                checkBox_WiederholVorgang.Checked = false;
+                textBox_WiderholungsKarteiID.Text = "";
+                richTextBox_Beschwerde.Text = "";
+                checkBox_Krankmeldung.Checked = false;
+                dateTimePicker_KMVon.Value = DateTime.Today;
+                dateTimePicker_KMBis.Value = DateTime.Today;
+                richTextBox_Diagnose.Text = "";
+                patienten = _patientenService.GetPatienten(textBox_PatientenSuche.Text);
+                UpdatePetientenViewe();
+            }
+            else
+            {
+                //Update
+                Patient p = new Patient();
+                p.ID = OpenPatientID;
+                p.Vorname = textBox_Vorname.Text;
+                p.Nachname = textBox_Nachname.Text;
+                p.Geschlecht = textBox_Geschlecht.Text;
+                p.GeborenAm = dateTimePicker_Geburtstag.Value;
+                _patientenService.UpdatePatient(p);
+                patienten = _patientenService.GetPatienten(textBox_PatientenSuche.Text);
+                UpdatePetientenViewe();
+
+            }
+        }
+
+        private void button_KarteiSpeichern_Click(object sender, EventArgs e)
+        {
+            if(OpenKarteiID == -1)
+            {
+                //Insert
+            }
+            else
+            {
+                //Update
+            }
         }
     }
 }

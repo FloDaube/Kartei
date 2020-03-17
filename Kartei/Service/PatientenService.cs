@@ -62,7 +62,64 @@ namespace Karteien.Service
 
             return res;
         }
+        public bool InsertPatient(Patient patient)
+        {
+            bool res = false;
 
+            using (SqlConnection connection = new SqlConnection(Connetionstring))
+            {
+                connection.Open();
+                if (connection.State == ConnectionState.Open)
+                {
+                    //SqlCommand command = new SqlCommand(_SQLData.getAnmeldung_Select(_user.UserID, _user.Kennwort), connection);
+                    SqlCommand command = new SqlCommand(_SQLData.InsertPatient(patient), connection);
+
+                    try
+                    {
+                        var t = command.ExecuteReader();
+                        if (t.RecordsAffected > 0)
+                        {
+                            res = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    //Lade Anmelde Daten
+                }
+            }
+            return res;
+        }
+        public bool UpdatePatient(Patient patient)
+        {
+            bool res = false;
+
+            using (SqlConnection connection = new SqlConnection(Connetionstring))
+            {
+                connection.Open();
+                if (connection.State == ConnectionState.Open)
+                {
+                    //SqlCommand command = new SqlCommand(_SQLData.getAnmeldung_Select(_user.UserID, _user.Kennwort), connection);
+                    SqlCommand command = new SqlCommand(_SQLData.UpdatePatient(patient), connection);
+
+                    try
+                    {
+                        var t = command.ExecuteReader();
+                        if (t.RecordsAffected > 0)
+                        {
+                            res = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    //Lade Anmelde Daten
+                }
+            }
+            return res;
+        }
         public List<P_Kartei> getKarteiOfPatient(int patient_ID)
         {
             var res = new List<P_Kartei>();

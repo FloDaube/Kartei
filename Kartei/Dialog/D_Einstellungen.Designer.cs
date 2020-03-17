@@ -37,8 +37,8 @@
             this.label_Vorname = new System.Windows.Forms.Label();
             this.label_UserID = new System.Windows.Forms.Label();
             this.label_ID = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox_UserKennwort2 = new System.Windows.Forms.TextBox();
+            this.textBox_UserKennwort1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -82,8 +82,8 @@
             this.tabPage_Benutzer.Controls.Add(this.label_Vorname);
             this.tabPage_Benutzer.Controls.Add(this.label_UserID);
             this.tabPage_Benutzer.Controls.Add(this.label_ID);
-            this.tabPage_Benutzer.Controls.Add(this.textBox7);
-            this.tabPage_Benutzer.Controls.Add(this.textBox6);
+            this.tabPage_Benutzer.Controls.Add(this.textBox_UserKennwort2);
+            this.tabPage_Benutzer.Controls.Add(this.textBox_UserKennwort1);
             this.tabPage_Benutzer.Controls.Add(this.label9);
             this.tabPage_Benutzer.Controls.Add(this.label8);
             this.tabPage_Benutzer.Controls.Add(this.label7);
@@ -105,6 +105,7 @@
             this.button_Speichern_Benutzer.TabIndex = 13;
             this.button_Speichern_Benutzer.Text = "Speichern";
             this.button_Speichern_Benutzer.UseVisualStyleBackColor = true;
+            this.button_Speichern_Benutzer.Click += new System.EventHandler(this.button_Speichern_Benutzer_Click);
             // 
             // label_Role
             // 
@@ -160,19 +161,19 @@
             this.label_ID.TabIndex = 7;
             this.label_ID.Text = "Placeholder";
             // 
-            // textBox7
+            // textBox_UserKennwort2
             // 
-            this.textBox7.Location = new System.Drawing.Point(82, 89);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(171, 20);
-            this.textBox7.TabIndex = 6;
+            this.textBox_UserKennwort2.Location = new System.Drawing.Point(82, 89);
+            this.textBox_UserKennwort2.Name = "textBox_UserKennwort2";
+            this.textBox_UserKennwort2.Size = new System.Drawing.Size(171, 20);
+            this.textBox_UserKennwort2.TabIndex = 6;
             // 
-            // textBox6
+            // textBox_UserKennwort1
             // 
-            this.textBox6.Location = new System.Drawing.Point(82, 63);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(171, 20);
-            this.textBox6.TabIndex = 5;
+            this.textBox_UserKennwort1.Location = new System.Drawing.Point(82, 63);
+            this.textBox_UserKennwort1.Name = "textBox_UserKennwort1";
+            this.textBox_UserKennwort1.Size = new System.Drawing.Size(171, 20);
+            this.textBox_UserKennwort1.TabIndex = 5;
             // 
             // label9
             // 
@@ -379,8 +380,8 @@
         private System.Windows.Forms.Label label_Vorname;
         private System.Windows.Forms.Label label_UserID;
         private System.Windows.Forms.Label label_ID;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox_UserKennwort2;
+        private System.Windows.Forms.TextBox textBox_UserKennwort1;
         private System.Windows.Forms.Button button_Speichern_Benutzer;
         private System.Windows.Forms.Button button_Speichern_Database;
     }

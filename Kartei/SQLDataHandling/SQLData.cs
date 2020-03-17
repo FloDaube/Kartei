@@ -60,6 +60,22 @@ namespace Karteien.SQLDataHandler
             return res;
         }
 
+        public string GetPatientenInsert(Patient patient)
+        {
+            string res = "";
+
+            res = $"Insert INTO [Patienten]([P_Vorname],[P_Nachname],[P_Geschlecht],[P_GeborenAm],[P_LetzterKartei])VALUES('{patient.Vorname}','{patient.Nachname}','{patient.Geschlecht}','{patient.GeborenAm}',NULL)";
+
+            return res;
+
+        }
+
+        public string GetUpdateKennwortString(User user)
+        {
+            string res = "";
+            res = $"Update [User] Set U_Kennwort = '{user.Kennwort}' where U_ID = {user.ID}";
+            return res;
+        }
         public List<User> ReadUserList(SqlDataReader reader)
         {
             List<User> res = new List<User>();
@@ -92,6 +108,24 @@ namespace Karteien.SQLDataHandler
 
             return res;
         }
+        
+        public string InsertPatient(Patient patient)
+        {
+            string res = "";
+
+            res = "Insert INTO [dbo].[Patienten]([P_Vorname],[P_Nachname],[P_Geschlecht],[P_GeborenAm])VALUES" +
+                $"('{patient.Vorname}','{patient.Nachname}','{patient.Geschlecht}','{patient.GeborenAm.Date}')";
+
+            return res;
+        }
+
+        public string UpdatePatient(Patient patient)
+        {
+            string res = "";
+            res = $"UPDATE [dbo].[Patienten] SET [P_Vorname] = '{patient.Vorname}',[P_Nachname] = '{patient.Nachname}',[P_Geschlecht] = '{patient.Geschlecht}',[P_GeborenAm] = '{patient.GeborenAm}'" +
+                $"Where P_ID = '{patient.ID}'";
+            return res;
+        }
 
         public List<Patient> ReadPatientList(SqlDataReader reader)
         {
@@ -108,6 +142,8 @@ namespace Karteien.SQLDataHandler
                     _Patient.Nachname = String.Format("{0}", record[2]);
                     _Patient.Geschlecht = String.Format("{0}", record[3]);
                     string[] date = String.Format("{0}", record[4]).Split('.');
+                    string[] d = date[2].Split(' ');
+                    date[2] = d[0];
                     _Patient.GeborenAm = new DateTime(Convert.ToInt32(date[2]), Convert.ToInt32(date[1]), Convert.ToInt32(date[0]));
                     res.Add(_Patient);
                 }
@@ -125,6 +161,24 @@ namespace Karteien.SQLDataHandler
             string res = "";
 
             res = $"SELECT * From [Karteien] Where K_Patient_ID = {ID} Order by K_Datum DESC";
+
+            return res;
+        }
+        public string InsertKartei(P_Kartei kartei)
+        {
+            string res = "";
+
+            res = $"INSERT INTO [dbo].[Karteien]([K_Patient_ID],[K_Arzt],[K_VorhaerigeID],[K_Kurzbeschreibung],[K_Datum],[K_Beschwerden],[K_Krankmeldung]" +
+           ",[K_KrankmeldungVon],[K_KrankmeldungBis],[K_Diagnose])VALUES(" +
+           $"'{kartei.Patient_ID}','{kartei.Arzt}','{kartei.VorherigeID}','{kartei.Kurzbeschreibung1}','{kartei.Datum}','{kartei.Beschwerde}','{kartei.Krankmeldung}','{kartei.KrankmeldungVon}','{kartei.KrankmeldungBis}','{kartei.Diagnose}')";
+
+            return res;
+        }
+        public string UpdateKartei(P_Kartei kartei)
+        {
+            string res = "";
+
+            res = $"Update";
 
             return res;
         }
@@ -174,7 +228,6 @@ namespace Karteien.SQLDataHandler
             }
             return res;
 
-            return res;
         }
 
         #endregion
