@@ -56,9 +56,16 @@
             this.textBox_Database = new System.Windows.Forms.TextBox();
             this.textBox_Server = new System.Windows.Forms.TextBox();
             this.tabPage_Admin = new System.Windows.Forms.TabPage();
+            this.listView_Users = new System.Windows.Forms.ListView();
+            this.columnHeader_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader_User = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader_Vorname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader_Nachname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader_Role = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage_Benutzer.SuspendLayout();
             this.tabPage_SQLDatabase.SuspendLayout();
+            this.tabPage_Admin.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -165,15 +172,19 @@
             // 
             this.textBox_UserKennwort2.Location = new System.Drawing.Point(82, 89);
             this.textBox_UserKennwort2.Name = "textBox_UserKennwort2";
+            this.textBox_UserKennwort2.PasswordChar = '*';
             this.textBox_UserKennwort2.Size = new System.Drawing.Size(171, 20);
             this.textBox_UserKennwort2.TabIndex = 6;
+            this.textBox_UserKennwort2.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox_UserKennwort2_PreviewKeyDown);
             // 
             // textBox_UserKennwort1
             // 
             this.textBox_UserKennwort1.Location = new System.Drawing.Point(82, 63);
             this.textBox_UserKennwort1.Name = "textBox_UserKennwort1";
+            this.textBox_UserKennwort1.PasswordChar = '*';
             this.textBox_UserKennwort1.Size = new System.Drawing.Size(171, 20);
             this.textBox_UserKennwort1.TabIndex = 5;
+            this.textBox_UserKennwort1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox_UserKennwort1_PreviewKeyDown);
             // 
             // label9
             // 
@@ -329,12 +340,54 @@
             // 
             // tabPage_Admin
             // 
+            this.tabPage_Admin.Controls.Add(this.listView_Users);
             this.tabPage_Admin.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Admin.Name = "tabPage_Admin";
             this.tabPage_Admin.Size = new System.Drawing.Size(712, 296);
             this.tabPage_Admin.TabIndex = 2;
             this.tabPage_Admin.Text = "Admin";
             this.tabPage_Admin.UseVisualStyleBackColor = true;
+            // 
+            // listView_Users
+            // 
+            this.listView_Users.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader_ID,
+            this.columnHeader_User,
+            this.columnHeader_Vorname,
+            this.columnHeader_Nachname,
+            this.columnHeader_Role});
+            this.listView_Users.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView_Users.HideSelection = false;
+            this.listView_Users.Location = new System.Drawing.Point(0, 0);
+            this.listView_Users.Name = "listView_Users";
+            this.listView_Users.Size = new System.Drawing.Size(712, 296);
+            this.listView_Users.TabIndex = 0;
+            this.listView_Users.UseCompatibleStateImageBehavior = false;
+            this.listView_Users.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader_ID
+            // 
+            this.columnHeader_ID.Text = "ID";
+            this.columnHeader_ID.Width = 50;
+            // 
+            // columnHeader_User
+            // 
+            this.columnHeader_User.Text = "User";
+            this.columnHeader_User.Width = 113;
+            // 
+            // columnHeader_Vorname
+            // 
+            this.columnHeader_Vorname.Text = "Vorname";
+            this.columnHeader_Vorname.Width = 114;
+            // 
+            // columnHeader_Nachname
+            // 
+            this.columnHeader_Nachname.Text = "Nachname";
+            this.columnHeader_Nachname.Width = 209;
+            // 
+            // columnHeader_Role
+            // 
+            this.columnHeader_Role.Text = "Role";
             // 
             // D_Einstellungen
             // 
@@ -350,6 +403,7 @@
             this.tabPage_Benutzer.PerformLayout();
             this.tabPage_SQLDatabase.ResumeLayout(false);
             this.tabPage_SQLDatabase.PerformLayout();
+            this.tabPage_Admin.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -384,5 +438,11 @@
         private System.Windows.Forms.TextBox textBox_UserKennwort1;
         private System.Windows.Forms.Button button_Speichern_Benutzer;
         private System.Windows.Forms.Button button_Speichern_Database;
+        private System.Windows.Forms.ListView listView_Users;
+        private System.Windows.Forms.ColumnHeader columnHeader_ID;
+        private System.Windows.Forms.ColumnHeader columnHeader_User;
+        private System.Windows.Forms.ColumnHeader columnHeader_Vorname;
+        private System.Windows.Forms.ColumnHeader columnHeader_Nachname;
+        private System.Windows.Forms.ColumnHeader columnHeader_Role;
     }
 }

@@ -67,7 +67,7 @@ namespace Karteien.Service
             return res;
         }
 
-        public bool UpdateKennwort()
+        public bool UpdateUser()
         {
             bool res = false;
             using (SqlConnection connection = new SqlConnection(Connetionstring))
@@ -77,7 +77,7 @@ namespace Karteien.Service
                     connection.Open();
                     if (connection.State == ConnectionState.Open)
                     {
-                        SqlCommand command = new SqlCommand(_SQLData.GetUpdateKennwortString(_user), connection);
+                        SqlCommand command = new SqlCommand(_SQLData.UpdateUser(_user), connection);
 
                         try
                         {
@@ -92,6 +92,44 @@ namespace Karteien.Service
                             MessageBox.Show(ex.Message, "Feheler Bei der Anmeldung!");
                         }
                         //Lade Anmelde Daten
+                    }
+                    else
+                    {
+                        MessageBox.Show("Keine Verbinndung zu Server möglich!", "Verbinndung");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Fehler");
+                }
+            }
+            return res;
+        }
+
+        public List<User> GetUserList()
+        {
+            List<User> res = new List<User>();
+            using (SqlConnection connection = new SqlConnection(Connetionstring))
+            {
+                try
+                {
+                    connection.Open();
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        SqlCommand command = new SqlCommand(_SQLData.getAnmeldung_Select("","",true), connection);
+
+                        try
+                        {
+                            SqlDataReader reader = command.ExecuteReader();
+                            if (reader.HasRows)
+                            {
+                                res = _SQLData.ReadUserList(reader);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Feheler Bei der Anmeldung!");
+                        }
                     }
                     else
                     {

@@ -65,24 +65,6 @@ namespace Kartei
             }
         }
 
-        private void TextBox_Username_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                textBox_Kennwort.Focus();
-            }
-        }
-
-        private void TextBox_Kennwort_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                object s = new object();
-                EventArgs ea = new EventArgs();
-                Button_Anmelden_Click(s,ea);
-            }
-        }
-
         private void AnmeldungsInfos_TextChanged(object sender, EventArgs e)
         {
             if(textBox_Username.Text.Length > 0)
@@ -91,6 +73,25 @@ namespace Kartei
                 {
                     button_Anmelden.Enabled = true;
                 }
+            }
+        }
+
+
+        private void textBox_Username_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textBox_Kennwort.Focus();
+            }
+        }
+
+        private void textBox_Kennwort_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                object s = new object();
+                EventArgs ea = new EventArgs();
+                Button_Anmelden_Click(s, ea);
             }
         }
     }

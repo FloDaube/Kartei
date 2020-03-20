@@ -33,7 +33,7 @@ namespace Karteien.SQLDataHandler
         {
             if (AllAsList)
             {
-                return $"SELECT U_ID, U_User_ID, U_Vorname, U_Nachname FROM[User]";
+                return $"SELECT U_ID, U_User_ID,U_Kennwort, U_Vorname, U_Nachname, U_Role FROM[User]";
             }
             else
             {
@@ -70,10 +70,10 @@ namespace Karteien.SQLDataHandler
 
         }
 
-        public string GetUpdateKennwortString(User user)
+        public string UpdateUser(User user)
         {
             string res = "";
-            res = $"Update [User] Set U_Kennwort = '{user.Kennwort}' where U_ID = {user.ID}";
+            res = $"Update [User] Set U_User_ID = '{user.UserID}', U_Kennwort = '{user.Kennwort}', U_Vorname = '{user.Vorname}', U_Nachname = '{user.Nachname}', U_Role = '{user.Role}' where U_ID = {user.ID}";
             return res;
         }
         public List<User> ReadUserList(SqlDataReader reader)
@@ -85,9 +85,10 @@ namespace Karteien.SQLDataHandler
                 IDataRecord record = reader;
                 _user.ID = Convert.ToInt32(String.Format("{0}", record[0]));
                 _user.UserID = String.Format("{0}", record[1]);
-                _user.Vorname = String.Format("{0}", record[2]);
-                _user.Nachname = String.Format("{0}", record[3]);
-                _user.Role = String.Format("{0}", record[4]);
+                _user.Kennwort = String.Format("{0}", record[2]);
+                _user.Vorname = String.Format("{0}", record[3]);
+                _user.Nachname = String.Format("{0}", record[4]);
+                _user.Role = String.Format("{0}", record[5]);
                 res.Add(_user);
             }
             return res;
@@ -178,7 +179,9 @@ namespace Karteien.SQLDataHandler
         {
             string res = "";
 
-            res = $"Update";
+            res = $"Update [dbo].[Karteien] SET K_Patient_ID = {kartei.Patient_ID},K_VorhaerigeID = {kartei.VorherigeID},K_Kurzbeschreibung = '{kartei.Kurzbeschreibung1}',K_Datum = '{kartei.Datum.Date}'," +
+                $"K_Beschwerden = '{kartei.Beschwerde}',K_Krankmeldung = '{kartei.Krankmeldung}',K_KrankmeldungVon = '{kartei.KrankmeldungVon}',K_KrankmeldungBis = '{kartei.KrankmeldungBis}',K_Diagnose = '{kartei.Diagnose}'" +
+                $"Where K_ID = {kartei.ID}";
 
             return res;
         }
@@ -227,9 +230,8 @@ namespace Karteien.SQLDataHandler
                 }
             }
             return res;
-
         }
-
+        
         #endregion
     }
 }

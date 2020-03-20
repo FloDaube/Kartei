@@ -17,10 +17,12 @@ namespace Karteien.Dialog
     {
         private TabPage adminPage;
         private User _User = new User();
+        AnmeldeService service = new AnmeldeService(new User());
         public D_Einstellungen(User user)
         {
             InitializeComponent();
             _User = user;
+            service = new AnmeldeService(_User);
         }
 
         private void Einstellungen_Load(object sender, EventArgs e)
@@ -36,6 +38,7 @@ namespace Karteien.Dialog
                 textBox_Kennwort1.Enabled = true;
                 textBox_Kennwort2.Enabled = true;
                 button_Speichern_Database.Enabled = true;
+                UserListviewLaden();
             }
             label_ID.Text = _User.ID.ToString();
             label_UserID.Text = _User.UserID;
@@ -44,6 +47,20 @@ namespace Karteien.Dialog
             label_Role.Text = _User.Role;
         }
 
+        private void UserListviewLaden()
+        {
+            var Users = service.GetUserList();
+            foreach(User u in Users)
+            {
+                ListViewItem itm = new ListViewItem();
+                itm.Text = u.ID.ToString();
+                itm.SubItems.Add(u.UserID);
+                itm.SubItems.Add(u.Vorname);
+                itm.SubItems.Add(u.Nachname);
+                itm.SubItems.Add(u.Role);
+                listView_Users.Items.Add(itm);
+            }
+        }
         private void Speicher_DatenabnkEinstellung(object sender, EventArgs e)
         {
             Einstellungen.Host = textBox_Server.Text;
@@ -64,7 +81,7 @@ namespace Karteien.Dialog
             {
                 _User.Kennwort = textBox_UserKennwort1.Text;
                 AnmeldeService service = new AnmeldeService(_User);
-                if (service.UpdateKennwort())
+                if (service.UpdateUser())
                 {
                     MessageBox.Show("Kennwort Aktualiesiert!");
                 }
@@ -72,6 +89,25 @@ namespace Karteien.Dialog
             else
             {
                 MessageBox.Show("Kennworter müssen übereinstimmen!","Kennwort");
+            }
+        }
+
+        private void textBox_UserKennwort1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                textBox_Kennwort2.Focus();
+            }
+
+        }
+
+        private void textBox_UserKennwort2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                object s = new object();
+                EventArgs ea = new EventArgs();
+                button_Speichern_Benutzer_Click(s,ea);
             }
         }
     }

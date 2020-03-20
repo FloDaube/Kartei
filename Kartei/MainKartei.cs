@@ -33,7 +33,7 @@ namespace Kartei
             _loginDialog = form;
             timer_AnmeldungScreen.Enabled = true;
             timer_LadePatienten.Enabled = true;
-            timer_SpeicherButtonAkktualiesieren.Enabled = true;
+            timer_SpeicherButtonAkktualiesieren.Enabled = false;
         }
 
         private void SuchePartient(object sender, EventArgs e)
@@ -425,6 +425,28 @@ namespace Kartei
             else
             {
                 //Update
+                P_Kartei k = new P_Kartei();
+                k.ID = OpenKarteiID;
+                k.Arzt = textBox_Arzt.Text;
+                k.Datum = dateTimePicker_Datum.Value;
+                k.Kurzbeschreibung1 = richTextBox_Kurzbeschreibung.Text;
+                if (textBox_WiderholungsKarteiID.Text.Length > 0)
+                {
+                    k.VorherigeID = Convert.ToInt32(textBox_WiderholungsKarteiID.Text);
+                }
+                else
+                {
+                    k.VorherigeID = -1;
+                }
+                k.Krankmeldung = checkBox_Krankmeldung.Checked;
+                k.KrankmeldungVon = dateTimePicker_KMVon.Value;
+                k.KrankmeldungBis = dateTimePicker_KMBis.Value;
+                k.Beschwerde = richTextBox_Beschwerde.Text;
+                k.Diagnose = richTextBox_Diagnose.Text;
+                k.Patient_ID = OpenPatientID;
+                _patientenService.UpdateKartei(k);
+                karteien = _patientenService.getKarteiOfPatient(OpenPatientID);
+                UpdateKarteiView();
             }
         }
 
@@ -457,5 +479,6 @@ namespace Kartei
             checkBox_WiederholVorgang.Checked = true;
             textBox_Arzt.Text = _user.Nachname;
         }
+
     }
 }

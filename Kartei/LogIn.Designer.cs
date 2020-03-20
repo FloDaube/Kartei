@@ -61,7 +61,7 @@
             this.textBox_Username.Size = new System.Drawing.Size(100, 20);
             this.textBox_Username.TabIndex = 2;
             this.textBox_Username.TextChanged += new System.EventHandler(this.AnmeldungsInfos_TextChanged);
-            this.textBox_Username.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_Username_KeyDown);
+            this.textBox_Username.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox_Username_PreviewKeyDown);
             // 
             // textBox_Kennwort
             // 
@@ -71,7 +71,7 @@
             this.textBox_Kennwort.Size = new System.Drawing.Size(100, 20);
             this.textBox_Kennwort.TabIndex = 3;
             this.textBox_Kennwort.TextChanged += new System.EventHandler(this.AnmeldungsInfos_TextChanged);
-            this.textBox_Kennwort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_Kennwort_KeyDown);
+            this.textBox_Kennwort.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox_Kennwort_PreviewKeyDown);
             // 
             // label3
             // 
@@ -96,6 +96,7 @@
             // 
             // LogIn
             // 
+            this.AcceptButton = this.button_Anmelden;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(298, 139);
