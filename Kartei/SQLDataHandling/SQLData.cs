@@ -59,7 +59,11 @@ namespace Karteien.SQLDataHandler
             }
             return res;
         }
-
+        /// <summary>
+        /// Patienten Insert String
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         public string GetPatientenInsert(Patient patient)
         {
             string res = "";
@@ -69,13 +73,50 @@ namespace Karteien.SQLDataHandler
             return res;
 
         }
-
+        /// <summary>
+        /// User Update String
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public string UpdateUser(User user)
         {
             string res = "";
             res = $"Update [User] Set U_User_ID = '{user.UserID}', U_Kennwort = '{user.Kennwort}', U_Vorname = '{user.Vorname}', U_Nachname = '{user.Nachname}', U_Role = '{user.Role}' where U_ID = {user.ID}";
             return res;
         }
+        /// <summary>
+        /// Insert User String
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public string InsertUser(User user)
+        {
+            string res = "";
+
+            res = $"Insert INTO [User](U_User_ID,U_Kennwort,U_Vorname,U_Nachname,U_Role) VALUES('{user.UserID}','{user.Kennwort}','{user.Vorname}','{user.Nachname}','{user.Role}')";
+
+            return res;
+        }
+
+        /// <summary>
+        /// Delete User String
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public string DeleteUser(User user)
+        {
+            string res = "";
+
+            res = $"Delete From [User] Where U_ID = {user.ID}";
+
+            return res;
+        }
+
+        /// <summary>
+        /// Read User Methode
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         public List<User> ReadUserList(SqlDataReader reader)
         {
             List<User> res = new List<User>();
@@ -95,6 +136,11 @@ namespace Karteien.SQLDataHandler
         }
         #endregion
         #region Patienten
+        /// <summary>
+        /// Get PatientenList String
+        /// </summary>
+        /// <param name="Suche"></param>
+        /// <returns></returns>
         public string getPatientenList_Select(string Suche)
         {
             string res = "";
@@ -109,7 +155,11 @@ namespace Karteien.SQLDataHandler
 
             return res;
         }
-        
+        /// <summary>
+        /// Inster Patient string
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         public string InsertPatient(Patient patient)
         {
             string res = "";
@@ -119,7 +169,11 @@ namespace Karteien.SQLDataHandler
 
             return res;
         }
-
+        /// <summary>
+        /// Update Patient String
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         public string UpdatePatient(Patient patient)
         {
             string res = "";
@@ -127,7 +181,11 @@ namespace Karteien.SQLDataHandler
                 $"Where P_ID = '{patient.ID}'";
             return res;
         }
-
+        /// <summary>
+        /// Read Patienten Liste
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         public List<Patient> ReadPatientList(SqlDataReader reader)
         {
             List<Patient> res = new List<Patient>();
@@ -156,7 +214,11 @@ namespace Karteien.SQLDataHandler
             }
             return res;
         }
-
+        /// <summary>
+        /// Kartei Liste String
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public string getKarteiList_Select(int ID)
         {
             string res = "";
@@ -165,6 +227,11 @@ namespace Karteien.SQLDataHandler
 
             return res;
         }
+        /// <summary>
+        /// Inster Kartei string
+        /// </summary>
+        /// <param name="kartei"></param>
+        /// <returns></returns>
         public string InsertKartei(P_Kartei kartei)
         {
             string res = "";
@@ -175,6 +242,11 @@ namespace Karteien.SQLDataHandler
 
             return res;
         }
+        /// <summary>
+        /// Update Kartei string
+        /// </summary>
+        /// <param name="kartei"></param>
+        /// <returns></returns>
         public string UpdateKartei(P_Kartei kartei)
         {
             string res = "";
@@ -185,6 +257,11 @@ namespace Karteien.SQLDataHandler
 
             return res;
         }
+        /// <summary>
+        /// Read Kartei Liste
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         public List<P_Kartei> ReadKarteiList(SqlDataReader reader)
         {
             List<P_Kartei> res = new List<P_Kartei>();

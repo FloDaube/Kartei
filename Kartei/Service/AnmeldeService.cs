@@ -66,7 +66,96 @@ namespace Karteien.Service
 
             return res;
         }
+        /// <summary>
+        /// Insert User Daten in DB
+        /// </summary>
+        /// <returns></returns>
+        public bool InsertUser()
+        {
+            bool res = false;
+            using (SqlConnection connection = new SqlConnection(Connetionstring))
+            {
+                try
+                {
+                    connection.Open();
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        SqlCommand command = new SqlCommand(_SQLData.InsertUser(_user), connection);
 
+                        try
+                        {
+                            SqlDataReader reader = command.ExecuteReader();
+                            if (reader.RecordsAffected > 0)
+                            {
+                                res = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Feheler Bei der Anmeldung!");
+                        }
+                        //Lade Anmelde Daten
+                    }
+                    else
+                    {
+                        MessageBox.Show("Keine Verbinndung zu Server möglich!", "Verbinndung");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Fehler");
+                }
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// Insert User Daten in DB
+        /// </summary>
+        /// <returns></returns>
+        public bool DeleteUser()
+        {
+            bool res = false;
+            using (SqlConnection connection = new SqlConnection(Connetionstring))
+            {
+                try
+                {
+                    connection.Open();
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        SqlCommand command = new SqlCommand(_SQLData.DeleteUser(_user), connection);
+
+                        try
+                        {
+                            SqlDataReader reader = command.ExecuteReader();
+                            if (reader.RecordsAffected > 0)
+                            {
+                                res = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Feheler Bei der Anmeldung!");
+                        }
+                        //Lade Anmelde Daten
+                    }
+                    else
+                    {
+                        MessageBox.Show("Keine Verbinndung zu Server möglich!", "Verbinndung");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Fehler");
+                }
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// Update User Daten in DB
+        /// </summary>
+        /// <returns></returns>
         public bool UpdateUser()
         {
             bool res = false;
@@ -105,7 +194,10 @@ namespace Karteien.Service
             }
             return res;
         }
-
+        /// <summary>
+        /// Get User als Liste
+        /// </summary>
+        /// <returns></returns>
         public List<User> GetUserList()
         {
             List<User> res = new List<User>();

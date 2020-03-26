@@ -1,4 +1,5 @@
-﻿using Karteien.Klassen;
+﻿using Kartei.Dialog;
+using Karteien.Klassen;
 using Karteien.Service;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Karteien.Dialog
     {
         private TabPage adminPage;
         private User _User = new User();
+        private List<User> Users = new List<User>();
         AnmeldeService service = new AnmeldeService(new User());
         public D_Einstellungen(User user)
         {
@@ -32,12 +34,12 @@ namespace Karteien.Dialog
             if (_User.Role == "Admin")
             {
                 tabControl1.TabPages.Add(adminPage);
-                textBox_Server.Enabled = true;
-                textBox_Database.Enabled = true;
-                textBox_SQLUser.Enabled = true;
-                textBox_Kennwort1.Enabled = true;
-                textBox_Kennwort2.Enabled = true;
-                button_Speichern_Database.Enabled = true;
+                //textBox_Server.Enabled = true;
+                //textBox_Database.Enabled = true;
+                //textBox_SQLUser.Enabled = true;
+                //textBox_Kennwort1.Enabled = true;
+                //textBox_Kennwort2.Enabled = true;
+                //button_Speichern_Database.Enabled = true;
                 UserListviewLaden();
             }
             label_ID.Text = _User.ID.ToString();
@@ -49,7 +51,8 @@ namespace Karteien.Dialog
 
         private void UserListviewLaden()
         {
-            var Users = service.GetUserList();
+            listView_Users.Items.Clear();
+            Users = service.GetUserList();
             foreach(User u in Users)
             {
                 ListViewItem itm = new ListViewItem();
@@ -57,7 +60,7 @@ namespace Karteien.Dialog
                 itm.SubItems.Add(u.UserID);
                 itm.SubItems.Add(u.Vorname);
                 itm.SubItems.Add(u.Nachname);
-                itm.SubItems.Add(u.Role);
+                //itm.SubItems.Add(u.Role);
                 listView_Users.Items.Add(itm);
             }
         }
@@ -108,6 +111,32 @@ namespace Karteien.Dialog
                 object s = new object();
                 EventArgs ea = new EventArgs();
                 button_Speichern_Benutzer_Click(s,ea);
+            }
+        }
+
+        private void button_NeuerUser_Click(object sender, EventArgs e)
+        {
+            User user = new User();
+            D_Benutzer benutzer = new D_Benutzer(user);
+            if (benutzer.ShowDialog() == DialogResult.OK)
+            {
+                UserListviewLaden();
+            }
+        }
+
+        private void UserAugewahlt(object sender, MouseEventArgs e)
+        {
+            int lv = Convert.ToInt32(listView_Users.SelectedItems[0].Text);
+            foreach (User u in Users)
+            {
+                if (u.ID == lv)
+                {
+                    D_Benutzer benutzer = new D_Benutzer(u);
+                    if (benutzer.ShowDialog() == DialogResult.OK)
+                    {
+                        UserListviewLaden();
+                    }
+                }
             }
         }
     }

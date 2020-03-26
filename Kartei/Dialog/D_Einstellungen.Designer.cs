@@ -61,7 +61,7 @@
             this.columnHeader_User = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_Vorname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader_Nachname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader_Role = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button_NeuerUser = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage_Benutzer.SuspendLayout();
             this.tabPage_SQLDatabase.SuspendLayout();
@@ -122,6 +122,7 @@
             this.label_Role.Size = new System.Drawing.Size(63, 13);
             this.label_Role.TabIndex = 12;
             this.label_Role.Text = "Placeholder";
+            this.label_Role.Visible = false;
             // 
             // label14
             // 
@@ -131,6 +132,7 @@
             this.label14.Size = new System.Drawing.Size(29, 13);
             this.label14.TabIndex = 11;
             this.label14.Text = "Role";
+            this.label14.Visible = false;
             // 
             // label_Nachname
             // 
@@ -260,6 +262,7 @@
             this.button_Speichern_Database.TabIndex = 17;
             this.button_Speichern_Database.Text = "Speichern";
             this.button_Speichern_Database.UseVisualStyleBackColor = true;
+            this.button_Speichern_Database.Visible = false;
             this.button_Speichern_Database.Click += new System.EventHandler(this.Speicher_DatenabnkEinstellung);
             // 
             // textBox_Kennwort2
@@ -269,6 +272,7 @@
             this.textBox_Kennwort2.Name = "textBox_Kennwort2";
             this.textBox_Kennwort2.Size = new System.Drawing.Size(209, 20);
             this.textBox_Kennwort2.TabIndex = 16;
+            this.textBox_Kennwort2.Visible = false;
             // 
             // label4
             // 
@@ -311,6 +315,7 @@
             this.textBox_Kennwort1.Enabled = false;
             this.textBox_Kennwort1.Location = new System.Drawing.Point(75, 98);
             this.textBox_Kennwort1.Name = "textBox_Kennwort1";
+            this.textBox_Kennwort1.ReadOnly = true;
             this.textBox_Kennwort1.Size = new System.Drawing.Size(209, 20);
             this.textBox_Kennwort1.TabIndex = 11;
             // 
@@ -319,6 +324,7 @@
             this.textBox_SQLUser.Enabled = false;
             this.textBox_SQLUser.Location = new System.Drawing.Point(75, 72);
             this.textBox_SQLUser.Name = "textBox_SQLUser";
+            this.textBox_SQLUser.ReadOnly = true;
             this.textBox_SQLUser.Size = new System.Drawing.Size(209, 20);
             this.textBox_SQLUser.TabIndex = 10;
             // 
@@ -327,6 +333,7 @@
             this.textBox_Database.Enabled = false;
             this.textBox_Database.Location = new System.Drawing.Point(75, 46);
             this.textBox_Database.Name = "textBox_Database";
+            this.textBox_Database.ReadOnly = true;
             this.textBox_Database.Size = new System.Drawing.Size(209, 20);
             this.textBox_Database.TabIndex = 9;
             // 
@@ -335,17 +342,19 @@
             this.textBox_Server.Enabled = false;
             this.textBox_Server.Location = new System.Drawing.Point(75, 20);
             this.textBox_Server.Name = "textBox_Server";
+            this.textBox_Server.ReadOnly = true;
             this.textBox_Server.Size = new System.Drawing.Size(209, 20);
             this.textBox_Server.TabIndex = 8;
             // 
             // tabPage_Admin
             // 
+            this.tabPage_Admin.Controls.Add(this.button_NeuerUser);
             this.tabPage_Admin.Controls.Add(this.listView_Users);
             this.tabPage_Admin.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Admin.Name = "tabPage_Admin";
             this.tabPage_Admin.Size = new System.Drawing.Size(712, 296);
             this.tabPage_Admin.TabIndex = 2;
-            this.tabPage_Admin.Text = "Admin";
+            this.tabPage_Admin.Text = "Benutzer Verwaltung";
             this.tabPage_Admin.UseVisualStyleBackColor = true;
             // 
             // listView_Users
@@ -354,9 +363,9 @@
             this.columnHeader_ID,
             this.columnHeader_User,
             this.columnHeader_Vorname,
-            this.columnHeader_Nachname,
-            this.columnHeader_Role});
+            this.columnHeader_Nachname});
             this.listView_Users.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView_Users.FullRowSelect = true;
             this.listView_Users.HideSelection = false;
             this.listView_Users.Location = new System.Drawing.Point(0, 0);
             this.listView_Users.Name = "listView_Users";
@@ -364,6 +373,7 @@
             this.listView_Users.TabIndex = 0;
             this.listView_Users.UseCompatibleStateImageBehavior = false;
             this.listView_Users.View = System.Windows.Forms.View.Details;
+            this.listView_Users.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.UserAugewahlt);
             // 
             // columnHeader_ID
             // 
@@ -385,9 +395,16 @@
             this.columnHeader_Nachname.Text = "Nachname";
             this.columnHeader_Nachname.Width = 209;
             // 
-            // columnHeader_Role
+            // button_NeuerUser
             // 
-            this.columnHeader_Role.Text = "Role";
+            this.button_NeuerUser.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button_NeuerUser.Location = new System.Drawing.Point(0, 273);
+            this.button_NeuerUser.Name = "button_NeuerUser";
+            this.button_NeuerUser.Size = new System.Drawing.Size(712, 23);
+            this.button_NeuerUser.TabIndex = 1;
+            this.button_NeuerUser.Text = "Neuer User";
+            this.button_NeuerUser.UseVisualStyleBackColor = true;
+            this.button_NeuerUser.Click += new System.EventHandler(this.button_NeuerUser_Click);
             // 
             // D_Einstellungen
             // 
@@ -443,6 +460,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader_User;
         private System.Windows.Forms.ColumnHeader columnHeader_Vorname;
         private System.Windows.Forms.ColumnHeader columnHeader_Nachname;
-        private System.Windows.Forms.ColumnHeader columnHeader_Role;
+        private System.Windows.Forms.Button button_NeuerUser;
     }
 }

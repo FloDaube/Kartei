@@ -27,6 +27,7 @@ namespace Karteien.Klassen
 
         public User()
         {
+            _iD = -1;
             UserID = "";
             Kennwort = "";
             Vorname = "";

@@ -70,6 +70,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialog\D_Benutzer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\D_Benutzer.Designer.cs">
+      <DependentUpon>D_Benutzer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\D_Einstellungen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     <Compile Include="Service\AnmeldeService.cs" />
     <Compile Include="Service\PatientenService.cs" />
     <Compile Include="SQLDataHandling\SQLData.cs" />
+    <EmbeddedResource Include="Dialog\D_Benutzer.resx">
+      <DependentUpon>D_Benutzer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialog\D_Einstellungen.resx">
       <DependentUpon>D_Einstellungen.cs</DependentUpon>
     </EmbeddedResource>

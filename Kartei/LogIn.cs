@@ -21,32 +21,7 @@ namespace Kartei
 
         private void Button_Anmelden_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //Settings Laden
-                var appSettings = ConfigurationManager.AppSettings;
-                string Host = appSettings[0] ?? "Not Found";
-                if(Host != "")
-                {
-                    Einstellungen.Host = Host;
-                }
-                string DB = appSettings[1] ?? "Not Found";
-                if (DB != "")
-                {
-                    Einstellungen.DataBase = DB;
-                }
-                string User = appSettings[2] ?? "Not Found";
-                if(User != "")
-                {
-                    Einstellungen.SQLUser = User;
-                }
-                string Kennwort = appSettings[3] ?? "Not Found";
-                if(Kennwort != "")
-                {
-                    Einstellungen.Passwort = Kennwort;
-                }
-            }
-            catch { }
+            Einstellungen.LoadFromConfig();
             User _user = new User(textBox_Username.Text,textBox_Kennwort.Text);
             _user.Anmelden();
             textBox_Kennwort.Text = "";
